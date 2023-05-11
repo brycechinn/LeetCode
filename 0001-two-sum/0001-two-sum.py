@@ -13,7 +13,7 @@ class Solution(object):
         for i, num in enumerate(nums):
             diff = target - num
             
-            if diff not in d:
-                d[num] = i
-            else:
+            if diff in d:
                 return [i, d[diff]]
+            else:
+                d[num] = i
