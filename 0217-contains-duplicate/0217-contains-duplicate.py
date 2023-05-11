@@ -9,7 +9,6 @@ class Solution(object):
             return False
         
         seen = set()
-        res = False
         
         for num in nums:
             if num in seen:
