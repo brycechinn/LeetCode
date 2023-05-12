@@ -5,9 +5,6 @@ class Solution(object):
         :rtype: List[List[str]]
         """
         
-        def isAnagram(a, b):
-            return sorted(a) == sorted(b)
-        
         d = {}
         
         for s in strs:
