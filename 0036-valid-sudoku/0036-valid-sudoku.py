@@ -5,8 +5,9 @@ class Solution(object):
         :rtype: bool
         """
         
-        # approach: check rows, then columns, then sub-boxes
+        # approach 1: check rows, then columns, then sub-boxes
         
+        '''
         def checkRows():
             for i in range(len(board)):
                 found = set()
@@ -63,5 +64,45 @@ class Solution(object):
             return True
                 
         return checkRows() and checkCols() and checkBoxes()
+        '''
+    
+        # approach 2: integer division to check sub-boxes
+
+        N = 9
+
+        rows = collections.defaultdict(set)
+        cols = collections.defaultdict(set)
+        squares = collections.defaultdict(set) # key: (r // 3, c // 3)
+
+        for r in range(N):
+            for c in range(N):
+                if board[r][c] == '.':
+                    continue
+
+                if (board[r][c] in rows[r] or 
+                    board[r][c] in cols[c] or 
+                    board[r][c] in squares[(r // 3, c // 3)]):
+                    return False
+
+                rows[r].add(board[r][c])
+                cols[c].add(board[r][c])
+                squares[(r //3, c // 3)].add(board[r][c])
+        return True
+            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
         
         
