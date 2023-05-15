@@ -9,16 +9,13 @@ class Solution(object):
         
         res = []
         
-        def twoSumII(i, l, r):
-            num = nums[i]
-            target = -num
-            
+        def twoSumII(num, l, r):            
             while l < r:
-                sum = nums[l] + nums[r]
+                sum = num + nums[l] + nums[r]
 
-                if sum < target:
+                if sum < 0:
                     l += 1
-                elif sum > target:
+                elif sum > 0:
                     r -= 1
                 else:
                     res.append([num, nums[l], nums[r]])
@@ -29,12 +26,11 @@ class Solution(object):
         
         nums.sort()
         length = len(nums)
-        i = 0
         
-        for i in range(length):
-            if i > 0 and nums[i] == nums[i - 1]:
+        for i, num in enumerate(nums):
+            if i > 0 and num == nums[i - 1]:
                 continue
             
-            twoSumII(i, i + 1, length - 1)
+            twoSumII(num, i + 1, length - 1)
         
         return res
