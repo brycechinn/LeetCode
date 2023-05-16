@@ -6,6 +6,9 @@ class Solution(object):
         :rtype: str
         """
         
+        # approach: sliding window with two dicts, compare have and need
+        # instead of comparing entire dicts
+        
         if len(s) < len(t): 
             return ''
         
