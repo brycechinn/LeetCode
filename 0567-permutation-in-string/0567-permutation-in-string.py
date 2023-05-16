@@ -6,6 +6,9 @@ class Solution(object):
         :rtype: bool
         """
         
+        # approach: sliding window, two dicts to store char counts,
+        # compare dicts at each iteration
+        
         if len(s1) > len(s2): return False
         
         d1 = dict.fromkeys(string.ascii_lowercase, 0)
@@ -16,12 +19,12 @@ class Solution(object):
         
         l = 0
         for r in range(len(s2)):
-            char = s2[r]
-            
-            d2[char] += 1
+            rc = s2[r]
+            d2[rc] += 1
                 
-            while d2[char] > d1[char]:
-                d2[s2[l]] -= 1
+            while d2[rc] > d1[rc]:
+                lc = s2[l]
+                d2[lc] -= 1
                 l += 1
             
             if d1 == d2:
