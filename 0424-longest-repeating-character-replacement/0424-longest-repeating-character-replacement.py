@@ -6,6 +6,8 @@ class Solution(object):
         :rtype: int
         """
         
+        # approach: sliding window, dict to store counts
+        
         if len(s) == 1:
             return 1
         
