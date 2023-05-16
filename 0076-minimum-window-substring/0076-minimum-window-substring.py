@@ -13,8 +13,7 @@ class Solution(object):
             return ''
         
         td, sd = {}, {}
-        res = ''
-        init = False
+        res, resLen = [-1, -1], float('infinity')
         
         for char in t:
             td[char] = 1 + td.get(char, 0)
@@ -29,12 +28,9 @@ class Solution(object):
                 have += 1
             
             while have == need:
-                if not init:
-                    res = s[l : r + 1]
-                    init = True
-                    
-                if len(s[l : r + 1]) < len(res):
-                    res = s[l : r + 1]
+                if (r - l + 1) < resLen:
+                    res = [l, r]
+                    resLen = (r - l + 1)
                 
                 sd[s[l]] -= 1
                     
@@ -42,7 +38,9 @@ class Solution(object):
                     have -= 1
                     
                 l += 1
-        return res
+                
+        l, r = res
+        return (s[l : r + 1]) if resLen != float('infinity') else ''
         
         
         
