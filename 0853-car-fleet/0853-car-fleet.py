@@ -24,14 +24,11 @@ class Solution(object):
             y, m, b = target, cars[i][0], cars[i][1]
             x = (y - float(b)) / float(m)
             times.append(x)
-            print(x)
-
-        print(times)
             
-        for time in times:
-            while stack and time >= stack[-1]:
-                stack.pop()
-                
+        for time in reversed(times):
+            if stack and time <= stack[-1]:
+                continue
+            
             stack.append(time)
         
         return len(stack)
