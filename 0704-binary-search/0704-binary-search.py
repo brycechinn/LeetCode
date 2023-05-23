@@ -6,7 +6,6 @@ class Solution:
         
         while l <= r:
             m = (r + l) // 2
-            print(m)
             
             if nums[m] < target:
                 l = m + 1
