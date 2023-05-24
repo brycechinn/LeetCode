@@ -4,6 +4,9 @@ class Solution:
         # approach: binary search to find inflection point,
         # i.e. nums[i] < nums[i - 1]
         
+        if len(nums) == 1:
+            return nums[0]
+        
         l, r = 0, len(nums) - 1
         res = float(inf)
         
