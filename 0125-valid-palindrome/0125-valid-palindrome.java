@@ -8,12 +8,12 @@ class Solution {
         while (l <= r) {
             while (l < s.length() && !Character.isLetter(s.charAt(l)) && 
                    !Character.isDigit(s.charAt(l))) {
-                l += 1;
+                l++;
             }
             
             while (r >= 0 && !Character.isLetter(s.charAt(r)) && 
                    !Character.isDigit(s.charAt(r))) {
-                r -= 1;
+                r--;
             }
             
             if (l < s.length() && r >= 0 && Character.toLowerCase(s.charAt(l)) != 
@@ -21,8 +21,8 @@ class Solution {
                 return false;
             }
             
-            l += 1;
-            r -= 1;
+            l++;
+            r--;
         }
         
         return true;
