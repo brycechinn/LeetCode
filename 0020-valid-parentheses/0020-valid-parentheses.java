@@ -10,7 +10,7 @@ class Solution {
         
         for (char c : s.toCharArray()) {
             if (hashmap.containsKey(c)) {
-                stack.add(c);
+                stack.push(c);
             } else {
                 if (!stack.empty() && c == hashmap.get(stack.peek())) {
                     stack.pop();
