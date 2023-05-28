@@ -11,6 +11,9 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
+        // approach 1: hashset
+        
+        /*
         Set<ListNode> seen = new HashSet<>();
         ListNode curr = head;
         
@@ -22,6 +25,23 @@ public class Solution {
             }
             
             curr = curr.next;
+        }
+        
+        return false;
+        */
+        
+        // approach 2: slow and fast ptr
+        
+        ListNode slow = head;
+        ListNode fast = head;
+        
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            
+            if (slow == fast) {
+                return true;
+            }
         }
         
         return false;
