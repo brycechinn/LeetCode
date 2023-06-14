@@ -11,31 +11,12 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        // approach 1: hashset
-        
-        /*
-        Set<ListNode> seen = new HashSet<>();
-        ListNode curr = head;
-        
-        while (curr != null) {
-            if (seen.contains(curr)) {
-                return true;
-            } else {
-                seen.add(curr);
-            }
-            
-            curr = curr.next;
-        }
-        
-        return false;
-        */
-        
-        // approach 2: slow and fast ptr
+        // approach: slow and fast pointer
         
         ListNode slow = head;
         ListNode fast = head;
         
-        while (fast != null && fast.next != null) {
+        while (slow != null && fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
             
