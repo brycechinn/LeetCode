@@ -5,10 +5,11 @@ class Solution {
         
         while (l <= r) {
             int m = (l + r) / 2;
+            int num = nums[m];
             
-            if (nums[m] < target) {
+            if (num < target) {
                 l = m + 1;
-            } else if (nums[m] > target) {
+            } else if (num > target) {
                 r = m - 1;
             } else {
                 return m;
