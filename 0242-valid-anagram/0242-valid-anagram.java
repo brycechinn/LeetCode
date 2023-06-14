@@ -14,6 +14,7 @@ class Solution {
         
         // approach 2: add chars to hashmap then compare
         
+        /*
         Map<Character, Integer> sHash = new HashMap<>();
         Map<Character, Integer> tHash = new HashMap<>();
         
@@ -34,5 +35,31 @@ class Solution {
         }
         
         return sHash.equals(tHash);
+        */
+        
+        // approach 3: add char counts to array store then compare
+        
+        s = s.toLowerCase();
+        t = t.toLowerCase();
+        
+        if (s.length() != t.length()) {
+            return false;
+        }
+        
+        int[] countsS = new int[26];
+        int[] countsT = new int[26];
+        
+        for (int i = 0; i < s.length(); i++) {
+            countsS[s.charAt(i) - 'a']++;
+            countsT[t.charAt(i) - 'a']++;
+        }
+        
+        for (int i = 0; i < 26; i++) {
+            if (countsS[i] != countsT[i]) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 }
