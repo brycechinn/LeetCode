@@ -4,19 +4,20 @@ class Solution {
         int r = s.length() - 1;
         
         while (l < r) {
-            while (l < s.length() && !isAlphanumeric(s.charAt(l))) {
+            char start = s.charAt(l);
+            char end = s.charAt(r);
+            
+            if (!Character.isLetterOrDigit(start)) {
                 l++;
+                continue;
             }
             
-            while (r >= 0 && !isAlphanumeric(s.charAt(r))) {
+            if (!Character.isLetterOrDigit(end)) {
                 r--;
+                continue;
             }
             
-            if (l >= r) {
-                break;
-            }
-            
-            if (Character.toLowerCase(s.charAt(l)) != Character.toLowerCase(s.charAt(r))) {
+            if (Character.toLowerCase(start) != Character.toLowerCase(end)) {
                 return false;
             }
             
@@ -25,9 +26,5 @@ class Solution {
         }
         
         return true;
-    }
-    
-    private boolean isAlphanumeric(char c) {
-        return Character.isLetter(c) || Character.isDigit(c); 
     }
 }
