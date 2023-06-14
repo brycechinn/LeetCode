@@ -15,6 +15,8 @@
  */
 class Solution {
     public TreeNode invertTree(TreeNode root) {
+        // approach: recursion, swap left and right nodes
+        
         helper(root);
         return root;
     }
