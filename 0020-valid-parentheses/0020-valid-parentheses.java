@@ -13,20 +13,19 @@ class Solution {
         for (int i = 0; i < s.length(); i++) {
             char p = s.charAt(i);
             
+            if (closing.containsKey(p)) {
+                stack.push(p);
+                continue;
+            }
+            
             if (stack.empty()) {
-                if (closing.containsKey(p)) {
-                    stack.push(p);
-                } else {
-                    return false;
-                }
+                return false;
+            }
+            
+            if (p == closing.get(stack.peek())){
+                stack.pop();
             } else {
-                if (p == closing.get(stack.peek())) {
-                    stack.pop();
-                } else if (closing.containsKey(p)){
-                    stack.push(p);
-                } else {
-                    return false;
-                }
+                return false;
             }
         }
         
