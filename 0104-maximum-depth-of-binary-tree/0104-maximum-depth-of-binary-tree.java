@@ -14,49 +14,17 @@
  * }
  */
 class Solution {
-    // approach 1: recursive DFS
-    /*
     public int maxDepth(TreeNode root) {
-        return DFS(root);
+        // approach: recursive DFS
+        
+        return helper(root, 0);
     }
     
-    public int DFS(TreeNode node) {
+    private int helper(TreeNode node, int depth) {
         if (node == null) {
-            return 0;
+            return depth;
         }
         
-        return 1 + Math.max(DFS(node.left), DFS(node.right));
-    }
-    */
-    
-    // approach 2: BFS
-    
-    public int maxDepth(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        
-        int level = 0;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode node = queue.remove();
-                
-                if (node.left != null) {
-                    queue.add(node.left);
-                }
-                
-                if (node.right != null) {
-                    queue.add(node.right);
-                }
-            }
-            
-            level++;
-        }
-        
-        return level;
+        return Math.max(helper(node.left, depth + 1), helper(node.right, depth + 1));
     }
 }
