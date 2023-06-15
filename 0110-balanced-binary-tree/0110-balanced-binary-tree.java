@@ -18,6 +18,9 @@ class Solution {
     boolean result = true;
     
     public boolean isBalanced(TreeNode root) {
+        // approach: bottom-up DFS
+        // check if height is unbalanced at each node
+        
         helper(root);
         return result;
     }
@@ -30,6 +33,7 @@ class Solution {
         int heightL = 1 + helper(node.left);
         int heightR = 1 + helper(node.right);
         
+        // processing
         if (Math.abs(heightL - heightR) > 1) {
             result = false;
         }
