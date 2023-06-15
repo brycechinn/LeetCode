@@ -14,33 +14,51 @@
  * }
  */
 class Solution {
+    
+    boolean isSameTree = true;
+    boolean result = false;
+    
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
-        if (subRoot == null || isSameTree(root, subRoot)) {
-            return true;
-        }
+        // approach: DFS -> when roots are same, call same tree
         
-        if (root == null) {
-            return false;
-        }
-        
-        boolean left = isSubtree(root.left, subRoot);
-        boolean right = isSubtree(root.right, subRoot);
-        
-        return left || right;
+        dfs(root, subRoot);
+        return result;
     }
     
-    public boolean isSameTree(TreeNode a, TreeNode b) {
-        if (a == null && b == null) {
-            return true;
+    private void dfs(TreeNode root, TreeNode subRoot) {
+        if (root == null || subRoot == null) {
+            return;
         }
         
-        if (a == null || b == null || a.val != b.val) {
-            return false;
+        if (root.val == subRoot.val) {
+            System.out.println("Same roots found");
+            isSameTree = true;
+            helper(root, subRoot);
+            
+            if (isSameTree) {
+                result = true;
+            }
         }
         
-        boolean left = isSameTree(a.left, b.left);
-        boolean right = isSameTree(a.right, b.right);
+        dfs(root.left, subRoot);
+        dfs(root.right, subRoot);
+    }
+    
+    private void helper(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return;
+        }
         
-        return left && right;
+        if (p == null || q == null) {
+            isSameTree = false;
+            return;
+        }
+        
+        if (p.val != q.val) {
+            isSameTree = false;
+        }
+        
+        helper(p.left, q.left);
+        helper(p.right, q.right);
     }
 }
