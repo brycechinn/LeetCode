@@ -31,7 +31,6 @@ class Solution {
         }
         
         if (root.val == subRoot.val) {
-            System.out.println("Same roots found");
             isSameTree = true;
             helper(root, subRoot);
             
