@@ -17,26 +17,23 @@ class Solution {
     boolean result = true;
     
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        // approach: do DFS on both trees at the same time
-        
-        dfs(p, q);
+        helper(p, q);
         return result;
     }
     
-    public void dfs(TreeNode p, TreeNode q) {
-        if (p == null || q == null) {
-            if (!(p == null && q == null)) {
-                result = false;
-            }
-            
+    private void helper(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return;
+        } else if (p == null || q == null) {
+            result = false;
             return;
         }
-        
-        dfs(p.left, q.left);
-        dfs(p.right, q.right);
         
         if (p.val != q.val) {
             result = false;
         }
+        
+        helper(p.left, q.left);
+        helper(p.right, q.right);
     }
 }
