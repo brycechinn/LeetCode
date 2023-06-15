@@ -14,6 +14,9 @@
  * }
  */
 class Solution {
+    // approach: top-down DFS
+    // make sure both nodes have same value at each node
+    
     boolean result = true;
     
     public boolean isSameTree(TreeNode p, TreeNode q) {
@@ -24,7 +27,9 @@ class Solution {
     private void helper(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
             return;
-        } else if (p == null || q == null) {
+        }
+        
+        if (p == null || q == null) {
             result = false;
             return;
         }
