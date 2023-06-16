@@ -1,7 +1,8 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
-        // approach: prefix and postfix arrays
+        // approach 1: prefix and postfix arrays
         
+        /*
         int[] pres = new int[nums.length];
         int[] posts = new int[nums.length];
         
@@ -31,5 +32,25 @@ class Solution {
         }
         
         return nums;
+        */
+        
+        // approach 2: O(1) memory solution
+        
+        int[] res = new int[nums.length];
+        
+        int pre = 1;
+        int post = 1;
+        
+        for (int i = 0; i < nums.length; i++) {
+            res[i] = pre;
+            pre *= nums[i];
+        }
+        
+        for (int i = nums.length - 1; i >= 0; i--) {
+            res[i] *= post;
+            post *= nums[i];
+        }
+        
+        return res;
     }
 }
