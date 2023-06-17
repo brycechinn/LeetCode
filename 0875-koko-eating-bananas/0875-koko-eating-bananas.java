@@ -10,7 +10,6 @@ class Solution {
         }
         
         // binary search on [1, max]
-        
         int l = 1;
         int r = max;
         int k = max;
@@ -23,9 +22,6 @@ class Solution {
             for (int pile : piles) {
                 hours += Math.ceil((double) pile / k);
             }
-            
-            System.out.println("takes " + hours + " hours when k = " + k);
-            System.out.println("current hours: " + hours + " goal hours: " + h);
             
             if (hours > h) {
                 l = k + 1;
