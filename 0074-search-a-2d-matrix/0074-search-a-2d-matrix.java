@@ -19,7 +19,6 @@ class Solution {
             }
         }
         
-        System.out.println("row: " + m);
         int[] nums = matrix[m];
         
         // binary search to find num
