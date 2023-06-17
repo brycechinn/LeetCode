@@ -17,10 +17,6 @@ class Solution {
             arrivalTimes[i] = x;
         }
         
-        for (double num : arrivalTimes) {
-            System.out.println(num);
-        }
-        
         // array of arrays of size 2 position : arrivalTime
         double[][] cars = new double[n][2];
         
@@ -32,10 +28,6 @@ class Solution {
         // sort cars by position
         Arrays.sort(cars, Comparator.comparingDouble(c -> c[0]));
         
-        for (double[] car : cars) {
-            System.out.println(car[0] + " " + car[1]);
-        }
-        
         // add arrivalTimes to stack from position closest to target
         for (int i = n - 1; i >= 0; i--) {
             double arrivalTime = cars[i][1];
@@ -46,8 +38,6 @@ class Solution {
             
             stack.push(arrivalTime);
         }
-        
-        System.out.println(stack);
                 
         return stack.size();
     }
