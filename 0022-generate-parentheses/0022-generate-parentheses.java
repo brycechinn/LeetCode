@@ -12,7 +12,7 @@ class Solution {
     }
     
     private void backtrack(int n, int numOpen, int numClosed) {
-        if (numOpen >= n && numClosed >= n) {
+        if (numOpen == n && numClosed == n) {
             StringBuilder stringBuilder = new StringBuilder();
             stack.stream().forEach(p -> stringBuilder.append(p));
             
@@ -25,7 +25,7 @@ class Solution {
             stack.pop();
         }
         
-        if (numClosed < n && numClosed < numOpen) {
+        if (numClosed < numOpen) {
             stack.push(")");
             backtrack(n, numOpen, numClosed + 1);
             stack.pop();
