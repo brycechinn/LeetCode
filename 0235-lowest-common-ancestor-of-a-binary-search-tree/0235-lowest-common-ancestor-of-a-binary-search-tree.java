@@ -14,20 +14,15 @@ class Solution {
     }
     
     private TreeNode helper(TreeNode node, TreeNode p, TreeNode q) {
-        if ((p.val < node.val && q.val > node.val) ||
-            (p.val > node.val && q.val < node.val) ||
-            (p.val == node.val) ||
-            (q.val == node.val)) {
-            
-            return node;
-        }
-        
         if (p.val < node.val && q.val < node.val) {
             // search left
             return helper(node.left, p, q);
-        } else {
+        }
+        if (p.val > node.val && q.val > node.val) {
             // search right
             return helper(node.right, p, q);
         }
+        
+        return node;
     }
 }
