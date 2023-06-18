@@ -29,8 +29,6 @@ class Solution {
         // make end of left half null
         slow.next = null;
         
-        System.out.println(slow.val);
-        
         // reverse right half
         ListNode prev = null;
         
@@ -52,12 +50,6 @@ class Solution {
             temp = right.next;
             right.next = left;
             right = temp;
-        }
-        
-        ListNode curr = head;
-        while (curr != null) {
-            System.out.print(curr.val + " ");
-            curr = curr.next;
         }
     }
 }
