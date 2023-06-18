@@ -50,8 +50,6 @@ class LRUCache {
     }
     
     public int get(int key) {
-        System.out.println("getting " + key);
-        
         if (!hashmap.containsKey(key)) {
             return -1;
         }
@@ -81,14 +79,12 @@ class LRUCache {
         append(node);
         capacity--;
         
-        System.out.println("putting " + key + ", capacity now " + capacity);
         // remove LRU if capacity exceeded
         if (capacity < 0) {
             Node lru = left.next;
             remove(lru);
             hashmap.remove(lru.key, lru);
             capacity++;
-            System.out.println("removed " + lru.key);
         }
     }
 }
