@@ -18,7 +18,7 @@ class Solution {
     boolean result = true;
     
     public boolean isValidBST(TreeNode root) {
-        // approach: DFS
+        // approach: DFS, must satisfy equality lower < node.val < upper
         
         helper(root, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         return result;
@@ -29,6 +29,7 @@ class Solution {
             return;
         }
         
+        // processing
         if (node.val <= lower || node.val >= upper) {
             result = false;
         }
