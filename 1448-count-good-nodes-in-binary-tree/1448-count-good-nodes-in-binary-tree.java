@@ -29,7 +29,6 @@ class Solution {
         }
         
         if (node.val >= max) {
-            System.out.println(node.val + " >= " + max);
             count++;
         }
         
