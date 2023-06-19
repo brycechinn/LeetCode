@@ -18,10 +18,9 @@ class Solution {
     List<Integer> list = new ArrayList<>();
     
     public int kthSmallest(TreeNode root, int k) {
-        // approach: in-order traversal -> array
+        // approach: in-order traversal -> list
         
         helper(root);
-        
         return list.get(k - 1);
     }
     
