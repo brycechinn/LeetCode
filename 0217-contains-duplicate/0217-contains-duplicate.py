@@ -1,20 +1,11 @@
-class Solution(object):
-    def containsDuplicate(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        
-        if len(nums) == 1:
-            return False
-        
-        seen = set()
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        hashset = set();
         
         for num in nums:
-            if num in seen:
-                return True
+            if num in hashset:
+                return True;
             
-            seen.add(num)
+            hashset.add(num);
         
-        return False
-        
+        return False;
