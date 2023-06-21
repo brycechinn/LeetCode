@@ -1,19 +1,12 @@
-class Solution(object):
-    def twoSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        hashmap = {}
         
-        # approach: hashmap
-        
-        d = {}
-        
+        for i, num in enumerate(nums):
+            hashmap[num] = i
+            
         for i, num in enumerate(nums):
             diff = target - num
             
-            if diff in d:
-                return [i, d[diff]]
-            else:
-                d[num] = i
+            if diff in hashmap and i != hashmap[diff]:
+                return [i, hashmap[diff]]
