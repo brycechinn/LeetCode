@@ -1,32 +1,14 @@
-class Solution(object):
-    def isAnagram(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: bool
-        """
-        
-        # approach: one dict for each string, then compare dicts
-        
-        if s == t:
-            return True
-        
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:    
         if len(s) != len(t):
             return False
         
-        sd = dict()
-        td = dict()
+        sCount = [0] * 26
+        tCount = [0] * 26
         
-        for char in s:
-            if char in sd:
-                sd[char] += 1
-            else:
-                sd[char] = 1
+        for i in range(len(s)):
+            sCount[ord(s[i]) - ord('a')] += 1
+            tCount[ord(t[i]) - ord('a')] += 1
         
-        for char in t:
-            if char in td:
-                td[char] += 1
-            else:
-                td[char] = 1
+        return sCount == tCount
         
-        return sd == td
