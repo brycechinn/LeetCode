@@ -7,8 +7,8 @@ class Solution:
             
             for c in s:
                 counts[ord(c) - ord('a')] += 1
-
-            key = ' '.join([str(x) for x in counts])
+            
+            key = tuple(counts)
             
             if key not in hashmap:
                 hashmap[key] = []
