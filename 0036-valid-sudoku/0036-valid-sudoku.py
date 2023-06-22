@@ -1,108 +1,48 @@
-class Solution(object):
-    def isValidSudoku(self, board):
-        """
-        :type board: List[List[str]]
-        :rtype: bool
-        """
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        # approach: check rows, then cols, then sub-boxes
         
-        # approach 1: check rows, then columns, then sub-boxes
-        
-        '''
-        def checkRows():
-            for i in range(len(board)):
-                found = set()
+        def checkBox(row_start, col_start):   
+            hashset = set()
 
-                for j in range(len(board)):
-                    num = board[i][j]
-                    
-                    if num == '.':
-                        continue
+            for i in range(row_start, row_start + 3):
+                for j in range(col_start, col_start + 3):
+                    n = board[i][j]
+
+                    if n != '.':
+                        if n in hashset:
+                            return False
                         
-                    if num in found:
-                        return False
-                    else:
-                        found.add(num)
+                        hashset.add(n)
+
             return True
         
-        def checkCols():
-            for i in range(len(board)):
-                found = set()
+        row_hash = collections.defaultdict(set)
+        col_hash = collections.defaultdict(set)
+        
+        # check rows and cols
+        for i in range(len(board)):
+            for j in range(len(board)):
+                r = board[i][j]
+                c = board[j][i]
                 
-                for j in range(len(board)):
-                    num = board[j][i]
+                if (r != '.'):
+                    if r in row_hash[i]:
+                        return False
                     
-                    if num == '.':
-                        continue
-                        
-                    if num in found:
-                        return False
-                    else:
-                        found.add(num)
-            return True
-        
-        def checkBox(row, col):
-            found = set()
-            
-            for i in range(row, row + 3):
-                for j in range(col, col + 3):
-                    num = board[i][j]
-                    
-                    if num == '.':
-                        continue
-                        
-                    if num in found:
-                        return False
-                    else:
-                        found.add(num)
-            return True
-        
-        def checkBoxes():
-            for i in range(0, 9, 3):
-                for j in range(0, 9, 3):
-                    if not checkBox(i, j):
-                        return False
-            return True
+                    row_hash[i].add(r)
                 
-        return checkRows() and checkCols() and checkBoxes()
-        '''
-    
-        # approach 2: integer division to check sub-boxes
-
-        N = 9
-
-        rows = collections.defaultdict(set)
-        cols = collections.defaultdict(set)
-        squares = collections.defaultdict(set) # key: (r // 3, c // 3)
-
-        for r in range(N):
-            for c in range(N):
-                if board[r][c] == '.':
-                    continue
-
-                if (board[r][c] in rows[r] or 
-                    board[r][c] in cols[c] or 
-                    board[r][c] in squares[(r // 3, c // 3)]):
+                if (c != '.'):
+                    if c in col_hash[i]:
+                        return False
+                    
+                    col_hash[i].add(c)
+        
+        # check sub-boxes
+        for i in range(0, 9, 3):
+            for j in range(0, 9, 3):
+                if not checkBox(i, j):
                     return False
-
-                rows[r].add(board[r][c])
-                cols[c].add(board[r][c])
-                squares[(r //3, c // 3)].add(board[r][c])
+        
         return True
-            
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        
-        
+                
