@@ -2,7 +2,6 @@ class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         # approach: prefix and postfix lists
         
-        
         length = len(nums)
         prefix = [0] * length     
         pre = 1
