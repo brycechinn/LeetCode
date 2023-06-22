@@ -3,24 +3,20 @@ class Solution:
         # approach: hasmap of num : frequency then list of frequency : list of nums
         
         hashmap = collections.defaultdict(int)
+        counts = [[] for _ in range(len(nums) + 1)] 
         result = []
         
         for num in nums:
             hashmap[num] += 1
 
-        counts = [[] for _ in range(len(nums))] 
-
         for num in hashmap:
             freq = hashmap[num]
-            counts[freq - 1].append(num)
+            counts[freq].append(num)
 
-        added = 0;
         for i in reversed(range(len(counts))):
-            if counts[i]:
-                for j in reversed(range(len(counts[i]))):
-                    result.append(counts[i][j])
-                    added += 1
-                    if added == k:
-                        return result
+            for num in counts[i]:
+                result.append(num)
+                if len(result) == k:
+                    return result
         
         
