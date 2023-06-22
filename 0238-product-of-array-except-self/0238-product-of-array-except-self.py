@@ -1,40 +1,28 @@
-class Solution(object):
-    def productExceptSelf(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        # approach: prefix and postfix lists
         
-        # approach 1: make an array where each element is the product of all
-        # other elements in the input array except itself
         
-        '''
-        res = [0] * len(nums)
+        length = len(nums)
+        prefix = [0] * length     
+        pre = 1
         
-        for i in range(len(nums)):
-            prod = 1
-            
-            for j in range(len(nums)):
-                if i != j:
-                    prod *= nums[j]
-            
-            res[i] = prod
-        
-        return res
-        '''
-    
-        # approach 2: two-pass array, first for prefix, second for postfix
-        
-        res = [1] * len(nums)
-        pre = post = 1
-        
-        for i in range(len(nums)):
-            res[i] = pre
+        for i in range(length):
+            prefix[i] = pre
             pre *= nums[i]
         
-        for i in reversed(range(len(nums))):
-            res[i] *= post
+        postfix = [0] * length
+        post = 1
+        
+        for i in reversed(range(length)):
+            postfix[i] = post
             post *= nums[i]
         
-        return res
+        result = [0] * length
+        
+        for i in range(length):
+            result[i] = prefix[i] * postfix[i]
+        
+        return result
+        
         
