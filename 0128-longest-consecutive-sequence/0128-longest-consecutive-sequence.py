@@ -1,35 +1,26 @@
-class Solution(object):
-    def longestConsecutive(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        
-        # approach: set from input array, then find starting values of sequences
-        # -> iterate from each starting value until the sequence is broken
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        # approach: hashset of starts of sequences, then iterate from each start
         
         if not nums:
             return 0
         
-        s, res = set(nums), 1
+        numset = set(nums)
+        starts = []
+        longest = 0
         
         for num in nums:
-            if (num - 1) in s:
-                continue
-            
-            curr = 0
-            
-            while num + curr in s:
-                curr += 1
-            
-            res = max(res, curr)
-            
-        return res
+            if num - 1 not in numset:
+                starts.append(num)
                 
-                
-                
-                
+        for start in starts:
+            num = start
+            length = 1
             
-            
-            
-            
+            while (num + 1 in numset):
+                length += 1
+                num = num + 1
+        
+            longest = max(longest, length)
+        
+        return longest
