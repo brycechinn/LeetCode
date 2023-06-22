@@ -1,66 +1,26 @@
-class Solution(object):
-    def topKFrequent(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # approach: hasmap of num : frequency then list of frequency : list of nums
         
-        # approach 1: dict to store num frequency, then sort dict
-        
-        '''
-        if len(nums) == 1:
-            return nums
-        
-        d = {}
-        res = []
+        hashmap = collections.defaultdict(int)
+        result = []
         
         for num in nums:
-            if num in d:
-                d[num] += 1
-            else:
-                d[num] = 1
-                  
-        sd = sorted(d.items(), key=lambda x:x[1], reverse=True)
-        
-        for i in range(k):
-            item = sd[i]
-            res.append(item[0])
+            hashmap[num] += 1
 
-        return res
-        '''
-        
-        # approach 2: dict to store num frequency, array of frequency -> nums
-        
-        if len(nums) == 1:
-            return nums
-        
-        d = {}
-        res = []
-        
-        for num in nums:
-            if num in d:
-                d[num] += 1
-            else:
-                d[num] = 1
-        
-        arr = [[] for i in range(len(nums) + 1)]
-        
-        for num in d:
-            freq = d[num]
-            arr[freq].append(num)
-        
-        for i in reversed(range(len(arr))):
-            for num in arr[i]:
-                res.append(num)
-                
-                if len(res) == k:
-                    return res
-        
-        
-        
-        
-        
-        
+        counts = [[] for _ in range(len(nums))] 
+
+        for num in hashmap:
+            freq = hashmap[num]
+            counts[freq - 1].append(num)
+
+        added = 0;
+        for i in reversed(range(len(counts))):
+            if counts[i]:
+                for j in reversed(range(len(counts[i]))):
+                    result.append(counts[i][j])
+                    added += 1
+                    if added == k:
+                        return result
         
         
