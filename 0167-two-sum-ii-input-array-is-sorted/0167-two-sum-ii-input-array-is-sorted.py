@@ -1,24 +1,19 @@
-class Solution(object):
-    def twoSum(self, numbers, target):
-        """
-        :type numbers: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        # approach: two pointers
         
-        # approach: two pointers, if sum > target, decrement r, if sum < target,
-        # increment l
-        
-        l, r = 0, len(numbers) - 1
+        l = 0
+        r = len(numbers) - 1
         
         while l < r:
-            sum = numbers[l] + numbers[r]
+            left = numbers[l]
+            right = numbers[r]
             
-            if sum < target:
+            total = left + right
+            
+            if total < target:
                 l += 1
-            elif sum > target:
+            elif total > target:
                 r -= 1
             else:
                 return [l + 1, r + 1]
-            
-        
