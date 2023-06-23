@@ -1,60 +1,25 @@
-class Solution(object):
-    def isPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        # approach: two pointers, move pointers until at valid char
         
-        # approach 1: scrub input then use left and right pointers, if at any
-        # point the chars are different, return False
+        l = 0
+        r = len(s) - 1
         
-        '''
-        def scrub(s):
-            res = ''
-            
-            for char in s:
-                if char.isalnum():
-                    res += char.lower()   
-                    
-            return res
-            
-        string = scrub(s)
-        
-        l, r = 0, len(string) - 1
+        s = s.lower()
         
         while l < r:
-            if string[l] != string[r]:
-                return False
-            
-            l += 1
-            r -= 1
-            
-        return True
-        '''
-        
-        # approach 2: reduce space complexity by filtering chars as you go,
-        # move pointers until they are at a valid char
-        
-        def alphaNum(c):
-            return (ord('A') <= ord(c) <= ord('Z') or
-                    ord('a') <= ord(c) <= ord('z') or
-                    ord('0') <= ord(c) <= ord('9'))
-        
-        l, r = 0, len(s) - 1
-        
-        while l < r:
-            while l < r and not alphaNum(s[l]):
+            if not s[l].isalnum():
                 l += 1
+                continue
             
-            while r > l and not alphaNum(s[r]):
+            if not s[r].isalnum():
                 r -= 1
-
-            if s[l].lower() != s[r].lower():
+                continue
+            
+            if s[l] != s[r]:
                 return False
             
             l += 1
             r -= 1
         
         return True
-                
-        
