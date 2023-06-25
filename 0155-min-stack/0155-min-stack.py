@@ -4,8 +4,6 @@ class MinStack:
         self.stack = []
         self.mins = []
         
-        
-
     def push(self, val: int) -> None:
         self.stack.append(val)
         
