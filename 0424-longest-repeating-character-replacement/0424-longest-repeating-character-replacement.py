@@ -1,31 +1,22 @@
-class Solution(object):
-    def characterReplacement(self, s, k):
-        """
-        :type s: str
-        :type k: int
-        :rtype: int
-        """
-        
-        # approach: sliding window, dict to store counts
-        
-        if len(s) == 1:
-            return 1
-        
-        count = {}
-        res = 0
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        # approach: hashmap of char : frequency in current window
+        # window size: r - l + 1
+
+        d = collections.defaultdict(int)
+        result = 0
         
         l = 0
-        for r in range(len(s)):
-            count[s[r]] = 1 + count.get(s[r], 0)
+        for r, c in enumerate(s):
+            d[c] += 1
+            count = max(d.values())
             
-            # window size: r - l + 1
-            while (r - l + 1) - max(count.values()) > k:
-                count[s[l]] -= 1
+            while (r - l + 1) - count > k:
+                d[s[l]] -= 1
                 l += 1
+                count = max(d.values())
             
-            res = max(res, r - l + 1)
-        return res
-        
-        
+            result = max(result, r - l + 1)
             
+        return result
             
