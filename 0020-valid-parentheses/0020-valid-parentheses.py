@@ -1,26 +1,32 @@
-class Solution(object):
-    def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        
-        if len(s) == 1:
-            return False
-        
-        d = { '(' : ')', '{' : '}', '[' : ']' }
+class Solution:
+    def isValid(self, s: str) -> bool:
+        d = { '(': ')', '{': '}', '[': ']' }
         stack = []
         
-        for char in s:
-            # opening brace
-            if char in d:
-                stack.append(char)
-            # closing brace
+        for p in s:
+            if p in d:
+                stack.append(p)
             else:
-                # if not empty and char matches top brace
-                if stack and char == d[stack[-1]]:
+                if stack and p == d[stack[-1]]:
                     stack.pop()
                 else:
                     return False
-
+            
+            
+            '''
+            if stack:
+                if p in d:
+                    stack.append(p)
+                else:
+                    if p == d[stack[-1]]:
+                        stack.pop()
+                    else:
+                        return False
+            else:
+                if p in d:
+                    stack.append(p)
+                else:
+                    return False
+            '''
+        
         return not stack
