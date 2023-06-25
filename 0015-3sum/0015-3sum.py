@@ -1,36 +1,41 @@
-class Solution(object):
-    def threeSum(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        # approach: sort nums, then two sum II at each index
         
-        # approach: sort array, then twosum at each index
+        result = []
         
-        res = []
-        
-        def twoSumII(num, l, r):            
+        def twoSumII(i):
+            l = i + 1
+            r = len(nums) - 1
+            target = -nums[i]
+            
+            print(i, l, r, target)
+            
             while l < r:
-                sum = num + nums[l] + nums[r]
-
-                if sum < 0:
+                left = nums[l]
+                right = nums[r]
+                
+                total = left + right
+                
+                if total < target:
                     l += 1
-                elif sum > 0:
+                elif total > target:
                     r -= 1
                 else:
-                    res.append([num, nums[l], nums[r]])
+                    result.append([nums[i], nums[l], nums[r]])
                     l += 1
+                    r -= 1
                     
                     while nums[l] == nums[l - 1] and l < r:
                         l += 1
-        
+                
         nums.sort()
-        length = len(nums)
-        
-        for i, num in enumerate(nums):
-            if i > 0 and num == nums[i - 1]:
+
+        for i in range(len(nums) - 2):
+            if i > 0 and nums[i] == nums[i - 1]:
                 continue
             
-            twoSumII(num, i + 1, length - 1)
+            twoSumII(i)
         
-        return res
+        return result
+            
