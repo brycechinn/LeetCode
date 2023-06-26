@@ -1,48 +1,25 @@
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        # approach: binary search to find row, then binary search
+        # to find num within row
         
-        # approach 1: add nums to list then binary search
-        
-        '''
-        nums = [num for row in matrix for num in row]
-         
-        l, r = 0, len(nums) - 1
-        
+        l = 0
+        r = len(matrix) - 1
+        m = 0
         while l <= r:
             m = (l + r) // 2
+            row = matrix[m]
             
-            if nums[m] < target:
+            if target > row[-1]:
                 l = m + 1
-            elif nums[m] > target:
+            elif target < row[0]:
                 r = m - 1
             else:
-                return True
-        
-        return False
-        '''
-    
-        # approach 2: two binary searches, one to find row and one to find
-        # num within row
-        
-        top, bot = 0, len(matrix) - 1
-        row = []
-        
-        while top <= bot:
-            mid = (top + bot) // 2
-            
-            row = matrix[mid]
-            
-            if row[-1] < target:
-                top = mid + 1
-            elif row[0] > target:
-                bot = mid - 1
-            else:
                 break
-    
-        if top > bot:
-            return False
         
-        l, r = 0, len(row) - 1
+        row = matrix[m]
+        l = 0
+        r = len(row) - 1
         while l <= r:
             m = (l + r) // 2
             
@@ -54,5 +31,3 @@ class Solution:
                 return True
         
         return False
-        
-        
