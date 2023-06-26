@@ -1,27 +1,29 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        # approach: binary search
+        # approach: binary search while keeping track of left and right
+        # sorted portions
         
-        l, r = 0, len(nums) - 1
+        l = 0
+        r = len(nums) - 1
         
         while l <= r:
             m = (l + r) // 2
-            
-            if target == nums[m]:
+
+            if nums[m] == target:
                 return m
             
-            # left sorted portion
-            if nums[l] <= nums[m]:
-                if target > nums[m] or target < nums[l]:
-                    l = m + 1
-                else:
-                    r = m - 1
-            # right sorted portion
-            else:
-                if target < nums[m] or target > nums[r]:
+            if nums[m] >= nums[l]: # left sorted portion
+                if target < nums[m] and target >= nums[l]:
+                    # search left
                     r = m - 1
                 else:
+                    # search right
                     l = m + 1
-        
+            else: # right sorted portion
+                if target > nums[m] and target <= nums[r]:
+                    # search right
+                    l = m + 1
+                else:
+                    # search left
+                    r = m - 1
         return -1
-        
