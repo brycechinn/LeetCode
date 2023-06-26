@@ -7,12 +7,7 @@ class Solution:
         
         def helper(opening, closing):
             if closing == n:
-                combo = ''
-                
-                for p in stack:
-                    combo += p
-                
-                result.append(combo)
+                result.append(''.join(stack))
                 return
             
             if opening < n:
