@@ -8,7 +8,7 @@ class TimeMap:
 
     def get(self, key: str, timestamp: int) -> str:
         pairs = self.d[key]
-        result = ('', 0)
+        result = ''
         
         # binary search
         l = 0
@@ -17,21 +17,18 @@ class TimeMap:
         while l <= r:
             m = (l + r) // 2
             
-            current = pairs[m][1]
+            value, current = pairs[m][0], pairs[m][1]
             
             if current == timestamp:
-                return pairs[m][0]
+                return value
 
             if current > timestamp:
                 r = m - 1
             else:
                 l = m + 1
-                
-                # potential new result
-                if current > result[1]:
-                    result = pairs[m]
+                result = value
         
-        return result[0]
+        return result
 
 # Your TimeMap object will be instantiated and called as such:
 # obj = TimeMap()
