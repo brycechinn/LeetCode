@@ -7,19 +7,24 @@ class Solution:
         # 4. use stack to group car fleets
 
         length = len(position)
-        
-        arrivals = [0] * length
-        cars = [[] for _ in range(length)]
+        arrivals = []
+        pairs = []
         
         for i in range(length):
-            arrivals[i] = (target - position[i]) / speed[i]
-            cars[i] = [position[i], arrivals[i]]
+            # y = mx + b
+            # x = (y - b) / m
+            
+            y, m, b = target, speed[i], position[i]
+            x = (y - b) / m
+            
+            arrivals.append(x)
+            pairs.append((position[i], arrivals[i]))
 
-        cars.sort(key=lambda x: x[0])
+        pairs.sort(key=lambda x: x[0])
 
         stack = []
-        for i in range(len(cars) - 1, -1, -1):
-            arrival = cars[i][1]
+        for i in range(length - 1, -1, -1):
+            arrival = pairs[i][1]
             
             if stack and arrival <= stack[-1]:
                 continue
