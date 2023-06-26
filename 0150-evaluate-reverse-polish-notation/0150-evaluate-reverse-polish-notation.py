@@ -1,38 +1,24 @@
-class Solution(object):
-    def evalRPN(self, tokens):
-        """
-        :type tokens: List[str]
-        :rtype: int
-        """
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        # approach: when encounter an operand, pop stack twice, do operation, push result
         
-        # approach: push nums onto a stack, when an operand is found,
-        # pop the stack twice and do the operation. then push the result
-        # back onto the stack and continue
+        ops = {'+', '-', '*', '/'}
+        stack = []
         
-        if len(tokens) == 1: return int(tokens[0])
-        
-        operands = set(['+', '-', '*', '/'])
-        stack, res = [], 0
-        
-        for token in tokens:
-            if token not in operands:
-                stack.append(int(token))
-            else:
+        for t in tokens:
+            if stack and t in ops:
                 right = stack.pop()
                 left = stack.pop()
                 
-                print(left, right)
-                
-                if token == '+':
-                    res = left + right
-                elif token == '-':
-                    res = left - right
-                elif token == '*':
-                    res = left * right
+                if t == '+':
+                    stack.append(left + right)
+                elif t == '-':
+                    stack.append(left - right)
+                elif t == '*':
+                    stack.append(left * right)
                 else:
-                    res = int(float(left) / float(right))
-                
-                stack.append(res)
-        return res
+                    stack.append(int(left / right))
+            else:
+                stack.append(int(t))
         
-        
+        return stack.pop()
