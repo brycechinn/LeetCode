@@ -1,37 +1,29 @@
-class Solution(object):
-    def carFleet(self, target, position, speed):
-        """
-        :type target: int
-        :type position: List[int]
-        :type speed: List[int]
-        :rtype: int
-        """
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        # approach:
+        # 1. get arrival times of each car
+        # 2. pair arrival times with start positions
+        # 3. sort list of pairs by start position
+        # 4. use stack to group car fleets
+
+        length = len(position)
         
-        # approach: create list of times that each car will reach the target,
-        # e.g. times[i] is time that car with position[i] and speed[i] will
-        # reach target. then maintain stack of times, "combining" times when
-        # a slower time is in front of a faster time.
+        arrivals = [0] * length
+        cars = [[] for _ in range(length)]
         
-        times, cars, stack = [], [], []
-        n = len(speed)
-        
-        for i in range(n):
-            cars.append((speed[i], position[i]))
-        
-        cars.sort(key=lambda x: x[1])
-        
-        for i in range(n):
-            y, m, b = target, cars[i][0], cars[i][1]
-            x = (y - float(b)) / float(m)
-            times.append(x)
+        for i in range(length):
+            arrivals[i] = (target - position[i]) / speed[i]
+            cars[i] = [position[i], arrivals[i]]
+
+        cars.sort(key=lambda x: x[0])
+
+        stack = []
+        for i in range(len(cars) - 1, -1, -1):
+            arrival = cars[i][1]
             
-        for time in reversed(times):
-            if stack and time <= stack[-1]:
+            if stack and arrival <= stack[-1]:
                 continue
             
-            stack.append(time)
+            stack.append(arrival)
         
         return len(stack)
-            
-            
-        
