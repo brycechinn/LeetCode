@@ -1,30 +1,38 @@
 class TimeMap:
 
     def __init__(self):
-        self.hashmap = {} # key: list of (val, timestamp)
-        
+        self.d = collections.defaultdict(list)
+
     def set(self, key: str, value: str, timestamp: int) -> None:
-        if key not in self.hashmap:
-            self.hashmap[key] = []
-        
-        self.hashmap[key].append((value, timestamp))
-        
+        self.d[key].append((value, timestamp))
+
     def get(self, key: str, timestamp: int) -> str:
-        pairs = self.hashmap.get(key, [])
-        res = ''
+        pairs = self.d[key]
+        result = ('', 0)
         
-        l, r = 0, len(pairs) - 1
+        # binary search
+        l = 0
+        r = len(pairs) - 1
+        
         while l <= r:
             m = (l + r) // 2
             
-            if pairs[m][1] <= timestamp:
-                res = pairs[m][0]
-                l = m + 1
-            else:
+            current = pairs[m][1]
+            
+            if current == timestamp:
+                return pairs[m][0]
+
+            if current > timestamp:
                 r = m - 1
-        
-        return res
+            else:
+                l = m + 1
                 
+                # potential new result
+                if current > result[1]:
+                    result = pairs[m]
+        
+        return result[0]
+
 # Your TimeMap object will be instantiated and called as such:
 # obj = TimeMap()
 # obj.set(key,value,timestamp)
