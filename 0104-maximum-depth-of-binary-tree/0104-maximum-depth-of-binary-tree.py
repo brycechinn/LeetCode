@@ -8,15 +8,15 @@ class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         # approach: top-down DFS, get max of left and right heights
         
-        def helper(node, height):
+        def helper(node):
             if not node:
-                return height
+                return 0
             
-            left = helper(node.left, height + 1)
-            right = helper(node.right, height + 1)
+            left = 1 + helper(node.left)
+            right = 1 + helper(node.right)
             
             return max(left, right)
         
-        return helper(root, 0)
+        return helper(root)
             
-            
+        
