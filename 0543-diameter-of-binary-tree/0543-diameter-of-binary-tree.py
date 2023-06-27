@@ -6,7 +6,7 @@
 #         self.right = right
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        # approach: bottom-up DFS, add left and right heights
+        # approach: bottom-up DFS, get max of result and left height + right height
         
         result = -1
         
