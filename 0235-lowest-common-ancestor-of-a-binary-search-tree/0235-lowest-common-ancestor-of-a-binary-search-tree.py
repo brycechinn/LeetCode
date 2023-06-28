@@ -11,24 +11,18 @@ class Solution:
         # if p and q < root, go left
         # if p and q > root, go right
         # else return root
-        
-        res = None
-        
+
         def helper(node):
-            nonlocal res
             nonlocal p
             nonlocal q
             
-            if not node:
-                return
-            
             if p.val < node.val and q.val < node.val:
-                helper(node.left)
-            elif p.val > node.val and q.val > node.val:
-                helper(node.right)
-            else:
-                res = node
+                return helper(node.left)
+            
+            if p.val > node.val and q.val > node.val:
+                return helper(node.right)
+            
+            return node
         
-        helper(root)
-        return res
+        return helper(root)
                 
