@@ -1,7 +1,7 @@
 class TrieNode:
     def __init__(self):
         self.children = {}
-        self.isEndOfWord = False
+        self.end = False
 
 class Trie:
 
@@ -17,7 +17,7 @@ class Trie:
             
             curr = curr.children[c]
 
-        curr.isEndOfWord = True
+        curr.end = True
             
     def search(self, word: str) -> bool:
         curr = self.root
@@ -28,7 +28,7 @@ class Trie:
             
             curr = curr.children[c]
         
-        return curr.isEndOfWord
+        return curr.end
 
     def startsWith(self, prefix: str) -> bool:
         curr = self.root
