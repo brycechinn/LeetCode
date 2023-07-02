@@ -2,14 +2,11 @@ class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
         # approach: maxheap of char counts, queue of (count, time + n)
         
-        counts = collections.Counter(tasks)
-        heap = []
-        
-        for v in counts.values():
-            heap.append(-1 * v)
-        
+        counts = Counter(tasks)
+        heap = [-v for v in counts.values()]
         heapq.heapify(heap)
-        queue = collections.deque()
+        
+        queue = deque()
         time = 0
         
         while heap or queue:
