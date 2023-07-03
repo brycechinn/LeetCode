@@ -2,11 +2,7 @@ class MedianFinder:
     # approach: maxheap for left portion, minheap for right portion
     
     def __init__(self):
-        self.left = [] # left maxheap
-        self.right = [] # right minheap
-        
-        heapq.heapify(self.left)
-        heapq.heapify(self.right)
+        self.left, self.right = [], []
 
     def addNum(self, num: int) -> None:
         # default add to left
