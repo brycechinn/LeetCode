@@ -1,13 +1,11 @@
 class Twitter:
-
+    # approach: followers: hashmap of followerId : hashset of followeeId,
+    # posts: hashmap of userId : list of (time, tweetId)
+    
     def __init__(self):
         self.time = 0
-        
-        # hashmap of followerId : hashset of followeeId
-        self.followers = collections.defaultdict(set)
-        
-        # hashmap of userId : list of (time, tweetId)
-        self.posts = collections.defaultdict(list)
+        self.followers = defaultdict(set)
+        self.posts = defaultdict(list)
 
     def postTweet(self, userId: int, tweetId: int) -> None:
         self.posts[userId].append((self.time, tweetId))
@@ -16,19 +14,24 @@ class Twitter:
     def getNewsFeed(self, userId: int) -> List[int]:
         heap, feed = [], []
         
-        for p in self.posts[userId]:
-            heap.append(p)
+        # user follows themself
+        self.followers[userId].add(userId)
         
-        for f in self.followers[userId]:
-            for p in self.posts[f]:
-                heap.append(p)
+        for followeeId in self.followers[userId]:
+            if followeeId in self.posts:
+                index = len(self.posts[followeeId]) - 1
+                time, tweetId = self.posts[followeeId][index]
+                heapq.heappush(heap, (time, tweetId, followeeId, index - 1))
                 
         heapq.heapify(heap)
-        
-        count = 0
-        while heap and count < 10:
-            feed.append(heapq.heappop(heap)[1])
-            count += 1
+
+        while heap and len(feed) < 10:
+            time, tweetId, followeeId, index = heapq.heappop(heap)
+            feed.append(tweetId)
+            
+            if index >= 0:
+                time, tweetId = self.posts[followeeId][index]
+                heapq.heappush(heap, (time, tweetId, followeeId, index - 1))
             
         return feed
 
