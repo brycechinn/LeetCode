@@ -4,7 +4,6 @@ class Solution:
         # entering right decision branch
         
         subset, res = [], []
-        
         nums.sort()
         
         def dfs(i):
