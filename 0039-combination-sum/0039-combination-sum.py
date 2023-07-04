@@ -5,23 +5,23 @@ class Solution:
         
         res, combo = [], []
         
-        def dfs(i):
-            if sum(combo) == target:
+        def dfs(i, total):
+            if total == target:
                 res.append(combo.copy())
                 return
             
-            if sum(combo) > target or i == len(candidates):
+            if total > target or i == len(candidates):
                 return
             
             # include num, don't increment i
             combo.append(candidates[i])
-            dfs(i)
+            dfs(i, total + candidates[i])
             
             # don't include num, increment i
             combo.pop()
-            dfs(i + 1)
+            dfs(i + 1, total)
         
-        dfs(0)
+        dfs(0, 0)
         return res
         
         
