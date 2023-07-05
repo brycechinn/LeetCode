@@ -1,5 +1,8 @@
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
+        # approach: backtracking DFS, three hashsets for cols, 
+        # positive diagonals (r + c), negative diagonals (r - c)
+        
         board = [['.' for _ in range(n)] for _ in range(n)]
         res = []
         cols = set()
