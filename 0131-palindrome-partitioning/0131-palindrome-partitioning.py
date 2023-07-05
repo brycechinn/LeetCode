@@ -1,6 +1,7 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        
+        # approach: backtracking DFS, decision tree: choose partition, 
+        # could be one char ... remaining string
         part, res = [], []
         
         def dfs(i):
