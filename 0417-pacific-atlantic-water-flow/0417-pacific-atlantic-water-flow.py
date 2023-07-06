@@ -1,38 +1,32 @@
 class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
-        # approach: add coastal nodes to pacific and atlantic, then dfs from
-        # each coastal node and return nodes that belong to both sets
+        # approach: DFS from each coastal node and return nodes that belong
+        # to both pacific and atlantic sets
         
         m, n = len(heights), len(heights[0])
         pacific, atlantic = set(), set()
         res = []
 
-        def dfs(r, c, lowest, is_pacific):
+        def dfs(r, c, lowest, visited):
             if (r not in range(m) or 
                 c not in range(n) or 
                 heights[r][c] < lowest or 
-                (is_pacific and (r, c) in pacific) or
-                (not is_pacific and (r, c) in atlantic)):
+                (r, c) in visited):
                 return
 
-            if is_pacific:
-                pacific.add((r, c))
-            
-            else:
-                atlantic.add((r, c))
-
+            visited.add((r, c))
             directions = ((1, 0), (-1, 0), (0, 1), (0, -1))
             
             for dr, dc in directions:
-                dfs(r + dr, c + dc, heights[r][c], is_pacific)
+                dfs(r + dr, c + dc, heights[r][c], visited)
         
         for r in range(m):
-            dfs(r, 0, heights[r][0], True)
-            dfs(r, n - 1, heights[r][n - 1], False)
+            dfs(r, 0, heights[r][0], pacific)
+            dfs(r, n - 1, heights[r][n - 1], atlantic)
             
         for c in range(n):
-            dfs(0, c, heights[0][c], True)
-            dfs(m - 1, c, heights[m - 1][c], False)
+            dfs(0, c, heights[0][c], pacific)
+            dfs(m - 1, c, heights[m - 1][c], atlantic)
 
         for r in range(m):
             for c in range(n):
