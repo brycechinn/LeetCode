@@ -30,9 +30,24 @@ class Solution:
             
             return area
         
+        def dfs(r, c):
+            if (r not in range(m) or 
+                c not in range(n) or 
+                grid[r][c] == 0 or 
+                (r, c) in visited):
+                return 0
+
+            visited.add((r, c))
+
+            return 1 + (dfs(r + 1, c) + 
+                    dfs(r - 1, c) +
+                    dfs(r, c + 1) + 
+                    dfs(r, c - 1))
+        
         for r in range(m):
             for c in range(n):
                 if grid[r][c] == 1 and (r, c) not in visited:
-                    res = max(res, bfs(r, c))
+                    # res = max(res, bfs(r, c))
+                    res = max(res, dfs(r, c))
         
         return res
