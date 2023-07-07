@@ -4,18 +4,18 @@ class Solution:
         
         m, n = len(grid), len(grid[0])
         visited = set()
-        total, found = 0, 0
+        fresh = 0
         
         for r in range(m):
             for c in range(n):
                 if grid[r][c] == 1:
-                    total += 1
+                    fresh += 1
                 
                 if grid[r][c] == 2:
                     visited.add((r, c))
         
         def bfs():
-            nonlocal found
+            nonlocal fresh
             q = collections.deque()
             time = 0
             
@@ -24,7 +24,6 @@ class Solution:
                 
             while q:
                 size = len(q)
-                
                 for _ in range(size):
                     r, c = q.popleft()
                     directions = ((1, 0), (-1, 0), (0, 1), (0, -1))
@@ -41,11 +40,11 @@ class Solution:
 
                         visited.add((nr, nc))
                         q.append((nr, nc))
-                        found += 1
+                        fresh -= 1
                 
                 time += 1
 
             return max(time - 1, 0)
         
         time = bfs()
-        return time if total == found else -1
+        return time if not fresh else -1
