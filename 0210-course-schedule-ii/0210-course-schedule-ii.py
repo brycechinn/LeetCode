@@ -9,7 +9,7 @@ class Solution:
         
         for a, b in prerequisites:
             prereqs[a].append(b)
-        
+            
         def dfs(c):
             nonlocal has_cycle
             
