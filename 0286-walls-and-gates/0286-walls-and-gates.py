@@ -8,7 +8,6 @@ class Solution:
         
         INF = pow(2, 31) - 1
         m, n = len(rooms), len(rooms[0])
-        
         q = collections.deque()
         
         for r in range(m):
