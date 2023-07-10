@@ -9,7 +9,7 @@ class Solution:
             p = par[n]
             
             while p != par[p]:
-                # graph compression
+                # path compression
                 par[p] = par[par[p]]
                 p = par[p]
             
