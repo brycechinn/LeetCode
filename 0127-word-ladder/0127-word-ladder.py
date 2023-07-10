@@ -1,5 +1,8 @@
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        # approach: adjacency list of pattern : list of words, then BFS to find 
+        # shortest path
+        
         if endWord not in wordList:
             return 0
 
