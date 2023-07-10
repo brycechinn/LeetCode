@@ -1,8 +1,8 @@
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        # approach: union find, return false if union cannot be done 
+        # approach 1: union find, return False if union cannot be done 
         # or num components > 1
-        
+        '''
         par = [i for i in range(n)]
         rank = [1] * n
         components = n
@@ -39,4 +39,30 @@ class Solution:
             components -= 1
             
         return components == 1
+        '''
+        # approach 2: adjacency list -> DFS, return False if cycle or 
+        # visited nodes < n
         
+        adj = collections.defaultdict(list)
+        visited = set()
+        
+        for n1, n2 in edges:
+            adj[n1].append(n2)
+            adj[n2].append(n1)
+        
+        def dfs(i, prev):
+            if i in visited:
+                return False
+            
+            visited.add(i)
+            
+            for neighbor in adj[i]:
+                if neighbor == prev:
+                    continue
+                    
+                if not dfs(neighbor, i):
+                    return False
+            
+            return True
+        
+        return dfs(0, -1) and len(visited) == n
