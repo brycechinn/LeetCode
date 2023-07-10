@@ -1,6 +1,7 @@
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        # approach: union find
+        # approach: union find, return false if union cannot be done 
+        # or num components > 1
         
         par = [i for i in range(n)]
         rank = [1] * n
