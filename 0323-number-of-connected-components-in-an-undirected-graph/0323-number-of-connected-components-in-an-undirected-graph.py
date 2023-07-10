@@ -34,18 +34,5 @@ class Solution:
         
         for p1, p2 in edges:
             union(p1, p2)
-        '''        
-        # make sure all nodes point to roots
-        for i in range(n):
-            p = par[i]
 
-            while p != par[p]:
-                par[p] = par[par[p]]
-                p = par[p]
-                par[i] = p
-
-        hashset = set()
-        for i in range(n):
-            hashset.add(par[i])'''
-        
         return res
