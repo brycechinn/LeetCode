@@ -1,9 +1,10 @@
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
-        # approach: union find, then count unique parents
+        # approach: union find, decrement result every time a union succeeds
         
         par = [i for i in range(n)]
         rank = [1] * n
+        res = n
         
         def find(n):
             p = par[n]
@@ -16,10 +17,11 @@ class Solution:
             return p
         
         def union(p1, p2):
+            nonlocal res
             p1, p2 = find(p1), find(p2)
             
             if p1 == p2:
-                return False
+                return
             
             if rank[p1] > rank[p2]:
                 par[p2] = p1
@@ -27,12 +29,12 @@ class Solution:
             else:
                 par[p1] = p2
                 rank[p2] += rank[p1]
-                
-            return True
+            
+            res -= 1
         
         for p1, p2 in edges:
             union(p1, p2)
-                
+        '''        
         # make sure all nodes point to roots
         for i in range(n):
             p = par[i]
@@ -44,6 +46,6 @@ class Solution:
 
         hashset = set()
         for i in range(n):
-            hashset.add(par[i])
+            hashset.add(par[i])'''
         
-        return len(hashset)
+        return res
