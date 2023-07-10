@@ -31,10 +31,9 @@ class Solution:
             return True
         
         for p1, p2 in edges:
-            if not union(p1, p2):
-                print('redundant connection detected')
-        
-        # compress par
+            union(p1, p2)
+                
+        # make sure all nodes point to roots
         for i in range(n):
             p = par[i]
 
