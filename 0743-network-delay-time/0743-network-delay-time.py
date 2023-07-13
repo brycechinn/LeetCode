@@ -1,6 +1,7 @@
 class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        # approach: Djikstra's Shortest Path from node k
+        # approach: adjacency list of p1: (dist, p2), then Djikstra's via BFS
+        # with min heap of (dist from source, node)
         
         # 1. build adjacency list
         adj = collections.defaultdict(list)
@@ -22,6 +23,7 @@ class Solution:
                 if i in visited:
                     continue
                 
+                # only mark once node has been popped from heap
                 visited.add(i)
                 dists[i] = min(dists[i], path)
                 
