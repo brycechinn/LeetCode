@@ -30,5 +30,4 @@ class Solution:
                         heapq.heappush(heap, (path + dist, nei))
                 
         bfs(k)
-        # print(dists)
         return max(dists[1:]) if len(visited) == n else -1
