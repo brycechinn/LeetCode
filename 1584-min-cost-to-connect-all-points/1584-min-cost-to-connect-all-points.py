@@ -22,7 +22,7 @@ class Solution:
             nonlocal res
             
             visited = set()
-            heap = [[0, 0]] # [dist, index]
+            heap = [(0, 0)] # [dist, index]
             
             while len(visited) < N:
                 dist, i = heapq.heappop(heap)
