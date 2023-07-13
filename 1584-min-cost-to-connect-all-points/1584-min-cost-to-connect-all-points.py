@@ -3,7 +3,6 @@ class Solution:
         # approach: adjacency list of p1 : (dist, p2), then Prim's Algorithm
         # -> MST via BFS
         
-        
         # 1. adjacency list of p1 : (dist, p2)
         N = len(points)
         adj = collections.defaultdict(list)
