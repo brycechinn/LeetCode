@@ -1,7 +1,8 @@
 class Solution:
     def swimInWater(self, grid: List[List[int]]) -> int:
-        # approach: modified Djikstras to find path with min highest 
-        # elevation point
+        # approach: modified Djikstra's to find path with min highest 
+        # elevation point, mark nodes as visited as they are pushed
+        # onto the min heap
         
         n = len(grid)
         visited = set()
