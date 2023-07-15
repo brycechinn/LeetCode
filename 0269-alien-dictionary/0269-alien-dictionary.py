@@ -11,7 +11,6 @@ class Solution:
             shortest = min(len(w1), len(w2))
             
             # invalid if words have same prefix but second word is longer
-            
             if len(w1) > len(w2) and w1[:shortest] == w2[:shortest]:
                 return ''
             
