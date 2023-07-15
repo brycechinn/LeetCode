@@ -47,8 +47,8 @@ class Solution:
         two = 1
         
         for i in range(n - 1):
-            i = one + two
+            new = one + two
             two = one
-            one = i
+            one = new
         
         return one
