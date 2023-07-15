@@ -32,7 +32,6 @@ class Solution:
         
         for i in range(n - 2, -1, -1):
             new = min(cost[i] + one, cost[i] + two)
-            # print('cost[i]: {} one: {} two: {}'.format(cost[i], one, two))
             two = one
             one = new
         
