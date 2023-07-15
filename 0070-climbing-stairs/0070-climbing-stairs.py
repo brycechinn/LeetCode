@@ -27,6 +27,7 @@ class Solution:
         
         # approach 2: bottom-up DP with memoization table
         
+        '''
         # time: O(n)
         # space: O(n)
         memo = [1] * (n + 1)
@@ -35,12 +36,13 @@ class Solution:
             memo[i] = memo[i - 1] + memo[i - 2]
 
         return memo[-1]
+        '''
         
         # approach 3: bottom-up DP with one and two variables
         
         # time: O(n)
         # space: O(1)
-        '''
+
         one = 1
         two = 1
         
@@ -50,4 +52,3 @@ class Solution:
             one = i
         
         return one
-        '''
