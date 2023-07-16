@@ -5,19 +5,16 @@ class Solution:
         
         count = 0
         
-        for i in range(len(s)):
-            # even length
-            l, r = i, i
-            while l >= 0 and r < len(s) and s[l] == s[r]:
-                count += 1
-                l -= 1
-                r += 1
+        def expand(l, r):
+            nonlocal count
             
-            # odd length
-            l, r = i, i + 1
             while l >= 0 and r < len(s) and s[l] == s[r]:
                 count += 1
                 l -= 1
                 r += 1
+        
+        for i in range(len(s)):
+            expand(i, i)     # odd length
+            expand(i, i + 1) # even length
                 
         return count
