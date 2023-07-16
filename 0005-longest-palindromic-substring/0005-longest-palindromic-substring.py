@@ -1,7 +1,7 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        # approach: iterate through s while expanding around center char, while loops
-        # for odd and even length
+        # approach: expand around center function, i, i for odd length 
+        # and i, i + 1 for even length
         
         longest, start, end = 0, 0, 0
 
