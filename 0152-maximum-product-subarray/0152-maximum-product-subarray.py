@@ -5,9 +5,7 @@ class Solution:
         sml, lrg = 1, 1
         res = max(nums)
         
-        for i in range(len(nums) - 1, -1, -1):        
-            num = nums[i]
-            
+        for num in nums:        
             if num == 0:
                 sml, lrg = 1, 1
                 continue
