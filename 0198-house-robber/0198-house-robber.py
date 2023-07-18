@@ -1,6 +1,7 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
         # approach: bottom-up DP via iteration, one and two variables
+        # recurrence relation: dp[i] = max(dp[i-1], nums[i] + dp[i-2])
         
         one, two = 0, nums[0]
         
