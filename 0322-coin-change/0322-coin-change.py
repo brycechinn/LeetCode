@@ -1,6 +1,7 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        # approach: bottom-up DP, tabulation: i : minimum num of coins that sum to i
+        # approach: bottom-up DP, tabulation i : minimum num of coins that sum to i
+        # recurrence relation: dp[i] = min(dp[i], 1 + dp[i - c]) for each coin c in coins
         
         dp = [float('inf')] * (amount + 1)
         dp[0] = 0
