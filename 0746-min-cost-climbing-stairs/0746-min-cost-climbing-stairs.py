@@ -25,13 +25,14 @@ class Solution:
         return res
         '''
         
-        # approach 2: bottom-up DP
+        # approach 2: bottom-up DP with one and two variables, insert 0 
+        # to beginning of costs
         cost.insert(0, 0)
         n = len(cost)
         one, two = cost[-1], 0
         
         for i in range(n - 2, -1, -1):
-            new = min(cost[i] + one, cost[i] + two)
+            new = cost[i] + min(one, two)
             two = one
             one = new
         
