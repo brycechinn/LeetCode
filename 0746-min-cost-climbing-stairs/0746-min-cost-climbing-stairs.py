@@ -27,6 +27,9 @@ class Solution:
         
         # approach 2: bottom-up DP with one and two variables, insert 0 
         # to beginning of costs
+        
+        # recurrence relation: dp[i] = cost[i] + min(dp[i+1], dp[i+2])
+        
         cost.insert(0, 0)
         n = len(cost)
         one, two = cost[-1], 0
