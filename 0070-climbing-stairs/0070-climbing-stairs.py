@@ -25,7 +25,7 @@ class Solution:
         return res
         '''
         
-        # approach 2: bottom-up DP with memoization table
+        # approach 2: bottom-up DP with tabulation
         
         '''
         # time: O(n)
@@ -39,6 +39,7 @@ class Solution:
         '''
         
         # approach 3: bottom-up DP with one and two variables
+        # recurrence relation: dp[n] = dp[n-1] + dp[n-2]
         
         # time: O(n)
         # space: O(1)
