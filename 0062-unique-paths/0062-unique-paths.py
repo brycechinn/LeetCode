@@ -3,6 +3,8 @@ class Solution:
         # approach: bottom-up DP, tabulation where dp[i][j] = ways to reach
         # target from point (i, j)
         
+        # recurrence relation: dp[r][c] = dp[r + 1][c] + dp[r][c + 1]
+        
         dp = [[0] * n for _ in range(m)]
 
         for r in range(m):
