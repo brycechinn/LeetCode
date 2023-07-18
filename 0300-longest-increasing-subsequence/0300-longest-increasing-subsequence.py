@@ -3,8 +3,7 @@ class Solution:
         # approach: bottom-up DP via backwards iteration, tabulation of
         # i : longest increasing subsequence from nums[i]
         
-        dp = [0] * len(nums)
-        dp[len(nums) - 1] = 1
+        dp = [1] * len(nums)
         
         for i in range(len(nums) - 2, -1, -1):
             candidates = [1]
