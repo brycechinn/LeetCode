@@ -6,14 +6,14 @@ class Solution:
         dp = {}
         
         def dfs(i, remaining):
-            if (i, remaining) in dp:
-                return dp[(i, remaining)]
-            
             if i == len(coins) or remaining < 0:
                 return 0
             
             if remaining == 0:
                 return 1
+            
+            if (i, remaining) in dp:
+                return dp[(i, remaining)]
 
             dp[(i, remaining)] = dfs(i, remaining - coins[i]) + dfs(i + 1, remaining)
             return dp[(i, remaining)]
