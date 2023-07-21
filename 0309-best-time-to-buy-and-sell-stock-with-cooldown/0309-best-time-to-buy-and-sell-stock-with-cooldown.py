@@ -17,12 +17,13 @@ class Solution:
             if holding:
                 # sell
                 s = dfs(i + 2, False) + prices[i]
-                dp[(i, holding)] = max(c, s)
+                max_profit = max(c, s)
             else:
                 # buy
                 b = dfs(i + 1, True) - prices[i]
-                dp[(i, holding)] = max(c, b)
+                max_profit = max(c, b)
             
-            return dp[(i, holding)]
+            dp[(i, holding)] = max_profit
+            return max_profit
                 
         return dfs(0, False)
