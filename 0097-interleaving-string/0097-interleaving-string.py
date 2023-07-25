@@ -1,7 +1,7 @@
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
-        # approach 1: top-down DP, memoization of (i1, i2) : isInterleaving
-
+        # approach 1: top-down DP, memoization of (i, j) : isInterleaving
+        '''
         if len(s1) + len(s2) != len(s3):
             return False
         
@@ -22,3 +22,25 @@ class Solution:
             return False
         
         return dfs(0, 0)
+        '''
+        # approach 2: bottom-up DP
+        if len(s1) + len(s2) != len(s3):
+            return False
+        
+        m, n = len(s1), len(s2)
+        dp = [[False for _ in range(n + 1)] for _ in range(m + 1)]
+        dp[m][n] = True
+        
+        for i in range(m, -1, -1):
+            for j in range(n, -1, -1):
+                if (i < m and s1[i] == s3[i + j] and dp[i + 1][j] or 
+                    j < n and s2[j] == s3[i + j] and dp[i][j + 1]):
+                    dp[i][j] = True
+        
+        # self.display(dp)
+        
+        return dp[0][0]
+        
+    def display(self, grid):
+        for r in range(len(grid)):
+            print(grid[r])
