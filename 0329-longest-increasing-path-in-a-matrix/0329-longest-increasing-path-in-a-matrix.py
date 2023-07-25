@@ -26,11 +26,8 @@ class Solution:
         
         for r in range(m):
             for c in range(n):
-                if not dp[r][c]:
-                    dfs(r, c, -1)
-        
-        # self.display(dp)
-        
+                dfs(r, c, -1)
+
         return max([max(r) for r in dp])
     
     def display(self, grid):
