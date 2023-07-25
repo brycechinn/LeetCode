@@ -26,7 +26,8 @@ class Solution:
         
         for r in range(m):
             for c in range(n):
-                dfs(r, c, -1)
+                if not dp[r][c]:
+                    dfs(r, c, -1)
         
         # self.display(dp)
         
