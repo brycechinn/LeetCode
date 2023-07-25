@@ -9,11 +9,9 @@ class Solution:
                 return dp[(i, total)]
             
             if i == len(nums):
-                if total == target:
-                    return 1
-                return 0
+                return 1 if total == target else 0
 
-            dp[(i, total)] =  (dfs(i + 1, total - nums[i]) + 
+            dp[(i, total)] = (dfs(i + 1, total - nums[i]) + 
                                dfs(i + 1, total + nums[i]))
             return dp[(i, total)]
         
