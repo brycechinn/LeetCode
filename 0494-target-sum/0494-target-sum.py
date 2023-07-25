@@ -1,6 +1,6 @@
 class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
-        # approach 1: DFS (TLE)
+        # approach: top-down DP with memoization of (i, total) : ways
         
         dp = {}
  
