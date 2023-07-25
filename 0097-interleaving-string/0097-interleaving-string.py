@@ -23,7 +23,9 @@ class Solution:
         
         return dfs(0, 0)
         '''
-        # approach 2: bottom-up DP
+        # approach 2: bottom-up DP where dp[i][j] = s3 is an interleaving of 
+        # s1[i:] and s2[j:]
+        
         if len(s1) + len(s2) != len(s3):
             return False
         
