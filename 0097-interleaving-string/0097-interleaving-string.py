@@ -14,12 +14,10 @@ class Solution:
             if i == len(s1) and j == len(s2):
                 return True
             
-            if i < len(s1) and s1[i] == s3[i + j] and dfs(i + 1, j):
+            if (i < len(s1) and s1[i] == s3[i + j] and dfs(i + 1, j) or 
+                j < len(s2) and s2[j] == s3[i + j] and dfs(i, j + 1)):
                 return True
-            
-            if j < len(s2) and s2[j] == s3[i + j] and dfs(i, j + 1):
-                return True
-            
+
             dp[(i, j)] = False
             return False
         
