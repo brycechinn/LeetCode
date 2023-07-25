@@ -12,7 +12,7 @@ class Solution:
                 return 1 if total == target else 0
 
             dp[(i, total)] = (dfs(i + 1, total - nums[i]) + 
-                               dfs(i + 1, total + nums[i]))
+                              dfs(i + 1, total + nums[i]))
             return dp[(i, total)]
         
         return dfs(0, 0)
