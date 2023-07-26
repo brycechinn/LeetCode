@@ -1,13 +1,10 @@
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
-        # approach 1: top-down DP with memoization
+        # approach 1: top-down DP, memoization of (i, j) : min operations
         
         dp = {}
         
         def dfs(i, j):
-            if i == len(word1) and j == len(word2):
-                return 0
-            
             if i == len(word1):
                 return len(word2) - j
             
@@ -25,6 +22,4 @@ class Solution:
                                      dfs(i + 1, j + 1)) # replace
             return dp[(i, j)]
 
-        return dfs(0, 0)
-                
-                
+        return dfs(0, 0)           
