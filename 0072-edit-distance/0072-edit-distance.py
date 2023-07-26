@@ -20,8 +20,9 @@ class Solution:
             if word1[i] == word2[j]:
                 dp[(i, j)] = dfs(i + 1, j + 1)
             else:
-                dp[(i, j)] = 1 + min(dfs(i, j + 1), dfs(i + 1, j), dfs(i + 1, j + 1))
-            
+                dp[(i, j)] = 1 + min(dfs(i, j + 1),     # insert
+                                     dfs(i + 1, j),     # delete
+                                     dfs(i + 1, j + 1)) # replace
             return dp[(i, j)]
 
         return dfs(0, 0)
