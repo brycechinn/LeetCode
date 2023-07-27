@@ -13,17 +13,15 @@ class Solution:
         
         return res
         '''
-        # approach 2: greedy, reset prefix when it becomes negative
+        # approach 2: greedy, reset total when it becomes negative
         
-        res, prefix = min(nums), 0
+        res, total = nums[0], 0
         
         for r in range(len(nums)):
-            prefix += nums[r]
-            res = max(res, prefix)
+            if total < 0:
+                total = 0
             
-            if prefix < 0:
-                prefix = 0
+            total += nums[r]
+            res = max(res, total)
         
         return res
-            
-                
