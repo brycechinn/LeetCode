@@ -2,8 +2,6 @@
 
 -- compute sum starting at 7th day, i.e. first day + 6 days
 
-
-
 SELECT visited_on, (
     SELECT SUM(amount)
     FROM Customer c2
