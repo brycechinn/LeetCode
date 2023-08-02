@@ -1,8 +1,8 @@
 # Write your MySQL query statement below
 
-SELECT user_id AS id, COUNT(*) AS num
+SELECT id, COUNT(*) AS num
 FROM ((
-    SELECT r1.requester_id AS user_id
+    SELECT r1.requester_id AS id
     FROM RequestAccepted r1
 ) 
 UNION ALL (
