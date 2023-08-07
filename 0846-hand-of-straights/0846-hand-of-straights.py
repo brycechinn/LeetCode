@@ -1,5 +1,8 @@
 class Solution:
     def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
+        # approach: greedy, hashmap of num : count, sort nums, then
+        # assemble groups one by one
+        
         if len(hand) % groupSize != 0:
             return False
         
@@ -9,15 +12,11 @@ class Solution:
         for num in hand:
             if counts[num] == 0:
                 continue
-            
-            counts[num] -= 1
-            
-            length = 1
-            while length < groupSize:
-                if num + length not in counts or counts[num + length] == 0:
+
+            for i in range(num, num + groupSize):
+                if i not in counts or counts[i] == 0:
                     return False
                 
-                counts[num + length] -= 1
-                length += 1
+                counts[i] -= 1
             
         return True
