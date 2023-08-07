@@ -1,6 +1,6 @@
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
-        # approach: Greedy
+        # approach: greedy, keep track of total, reset if it becomes negative
         
         if sum(gas) < sum(cost):
             return -1
