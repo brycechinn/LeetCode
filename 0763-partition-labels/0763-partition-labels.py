@@ -6,20 +6,20 @@ class Solution:
         for c in s:
             counts[c] = 1 + counts.get(c, 0)
         
-        length = 0
+        length, matches, zeroes = 0, 0, len(counts)
         for c in s:
-            length += 1
+            if c not in window:
+                zeroes -= 1
+            
             window[c] = 1 + window.get(c, 0)
+            length += 1
             
-            matches = 0
-            for k in counts:
-                if (k in window and window[k] == counts[k] or 
-                    k not in window):
-                    matches += 1
+            if window[c] == counts[c]:
+                matches += 1
             
-            if matches == len(counts):
+            if matches + zeroes == len(counts):
                 res.append(length)
-                length = 0
+                length, matches, zeroes = 0, 0, len(counts)
                 window = {}
             
         return res
