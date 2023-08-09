@@ -1,5 +1,7 @@
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        # approach: 4 pointers (left, right, top, bottom), check
+        # condition after top row and right column
         
         left, right = 0, len(matrix[0])
         top, bottom = 0, len(matrix)
