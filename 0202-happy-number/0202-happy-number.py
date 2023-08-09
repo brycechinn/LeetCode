@@ -2,13 +2,13 @@ class Solution:
     def isHappy(self, n: int) -> bool:
         # approach: hashset of seen nums, loop until n == 1 or duplicate found
         
-        seen = set()
+        visited = set()
         
         while n != 1:
-            if n in seen:
+            if n in visited:
                 return False
             
-            seen.add(n)
+            visited.add(n)
             total = 0
             
             for c in str(n):
