@@ -1,4 +1,6 @@
 class DetectSquares:
+    # approach: hashmap of point : count, list of points, look for diagonal points, 
+    # then check if corners exist in hashmap
 
     def __init__(self):
         self.counts, self.points = {}, []
