@@ -1,5 +1,7 @@
 class Solution:
     def reverseBits(self, n: int) -> int:
+        # approach: add each bit to res, starting at the last bit, by using OR
+        
         res = 0
         
         for i in range(32):
