@@ -1,18 +1,14 @@
 class Solution:
     def countBits(self, n: int) -> List[int]:
+        dp = [0] * (n + 1)
+        offset = 1
         
-        res = [0] * (n + 1)
+        for i in range(1, n + 1):
+            if i == offset * 2:
+                offset *= 2
+            
+            dp[i] = 1 + dp[i - offset]
         
-        for i in range(n, -1, -1):
-            res[i] = self.countOnes(i)
-        
-        return res
-    
-    def countOnes(self, n):
-        res = 0
-        
-        while n:
-            res += n % 2
-            n = n >> 1
-        
-        return res
+        return dp
+            
+            
