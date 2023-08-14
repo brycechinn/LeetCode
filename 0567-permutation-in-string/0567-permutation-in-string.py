@@ -1,35 +1,28 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
+        # approach: sliding window, two hashmaps of char : frequency
+        
         if len(s1) > len(s2):
             return False
         
-        counts1 = [0] * 26
-        counts2 = [0] * 26
+        d1, d2 = [0] * 26, [0] * 26
+        
+        for c in s1:
+            d1[ord(c) - ord('a')] += 1
 
         l = 0
-        r = 0
-        for i in range(len(s1)):
-            c1 = s1[i]
-            c2 = s2[i]
+        for r in range(len(s2)):
+            right_char = s2[r]
+            d2[ord(right_char) - ord('a')] += 1
             
-            counts1[ord(c1) - ord('a')] += 1
-            counts2[ord(c2) - ord('a')] += 1
-            r += 1
-        
-        if counts1 == counts2:
-            return True
-        
-        r -= 1
-        while r < len(s2) - 1:
-            counts2[ord(s2[l]) - ord('a')] -= 1
-            l += 1
-            r += 1
-            counts2[ord(s2[r]) - ord('a')] += 1
-
-            if counts1 == counts2:
+            if (not d1[ord(right_char) - ord('a')] or 
+                d2[ord(right_char) - ord('a')] > d1[ord(right_char) - ord('a')]):
+                while d1[ord(right_char) - ord('a')] != d2[ord(right_char) - ord('a')] and l <= r:
+                    left_char = s2[l]
+                    d2[ord(left_char) - ord('a')] -= 1
+                    l += 1
+            
+            if d1 == d2:
                 return True
         
         return False
-            
-            
-            
