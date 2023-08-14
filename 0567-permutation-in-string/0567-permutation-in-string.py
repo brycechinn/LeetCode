@@ -5,24 +5,28 @@ class Solution:
         if len(s1) > len(s2):
             return False
         
-        d1, d2 = [0] * 26, [0] * 26
+        d1, d2 = {}, {}
         
         for c in s1:
-            d1[ord(c) - ord('a')] += 1
+            d1[c] = 1 + d1.get(c, 0)
 
         l = 0
         for r in range(len(s2)):
-            right_char = s2[r]
-            d2[ord(right_char) - ord('a')] += 1
+            head = s2[r]
+            d2[head] = 1 + d2.get(head, 0)
             
-            if (not d1[ord(right_char) - ord('a')] or 
-                d2[ord(right_char) - ord('a')] > d1[ord(right_char) - ord('a')]):
-                while d1[ord(right_char) - ord('a')] != d2[ord(right_char) - ord('a')] and l <= r:
-                    left_char = s2[l]
-                    d2[ord(left_char) - ord('a')] -= 1
+            if head not in d1 or d1[head] < d2[head]:
+                while d1.get(head, 0) != d2.get(head, 0) and l <= r:
+                    tail = s2[l]
+                    d2[tail] -= 1
                     l += 1
             
-            if d1 == d2:
+            matches = 0
+            for c in d1:
+                if d1.get(c, 0) == d2.get(c, 0):
+                    matches += 1
+            
+            if matches == len(d1):
                 return True
         
         return False
