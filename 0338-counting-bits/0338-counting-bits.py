@@ -5,10 +5,8 @@ class Solution:
         
         for i in range(1, n + 1):
             if i == offset * 2:
-                offset *= 2
+                offset = i
             
             dp[i] = 1 + dp[i - offset]
         
         return dp
-            
-            
