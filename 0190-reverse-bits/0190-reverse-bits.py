@@ -3,7 +3,7 @@ class Solution:
         res = 0
         
         for i in range(32):
-            bit = n % 2
+            bit = n & 1
             res = res | (bit << (31 - i))
             n = n >> 1
         
