@@ -1,14 +1,14 @@
 class Solution:
-    def isAnagram(self, s: str, t: str) -> bool:    
+    def isAnagram(self, s: str, t: str) -> bool:
+        # approach: two arrays of char counts, compare
+        
         if len(s) != len(t):
             return False
         
-        sCount = [0] * 26
-        tCount = [0] * 26
+        s_counts, t_counts = [0] * 26, [0] * 26
         
         for i in range(len(s)):
-            sCount[ord(s[i]) - ord('a')] += 1
-            tCount[ord(t[i]) - ord('a')] += 1
+            s_counts[ord(s[i]) - ord('a')] += 1
+            t_counts[ord(t[i]) - ord('a')] += 1
         
-        return sCount == tCount
-        
+        return s_counts == t_counts
