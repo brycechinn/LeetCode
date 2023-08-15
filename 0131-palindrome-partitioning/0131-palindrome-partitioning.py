@@ -1,11 +1,11 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        # approach: backtracking DFS, decision tree: choose partition, 
-        # could be one char ... remaining string
-        part, res = [], []
+        # approach: backtracking
+        
+        res, part = [], []
         
         def dfs(i):
-            if i >= len(s):
+            if i == len(s):
                 res.append(part.copy())
                 return
             
@@ -27,4 +27,4 @@ class Solution:
             r -= 1
         
         return True
-            
+        
