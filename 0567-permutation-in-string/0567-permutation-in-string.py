@@ -5,29 +5,22 @@ class Solution:
         if len(s1) > len(s2):
             return False
         
-        d1 = collections.defaultdict(int)
-        d2 = collections.defaultdict(int)
+        d1, d2 = [0] * 26, [0] * 26
         
         for c in s1:
-            d1[c] += 1
+            d1[ord(c) - ord('a')] += 1
 
         l = 0
         for r in range(len(s2)):
-            head = s2[r]
-            d2[head] += 1
+            index = ord(s2[r]) - ord('a')
+            d2[index] += 1
             
-            if head not in d1 or d1[head] < d2[head]:
-                while d1[head] != d2[head] and l <= r:
-                    tail = s2[l]
-                    d2[tail] -= 1
+            if d1[index] == 0 or d2[index] > d1[index]:
+                while d1[index] != d2[index] and l <= r:
+                    d2[ord(s2[l]) - ord('a')] -= 1
                     l += 1
             
-            matches = 0
-            for c in d1:
-                if d1[c] == d2[c]:
-                    matches += 1
-            
-            if matches == len(d1):
+            if d1 == d2:
                 return True
         
         return False
