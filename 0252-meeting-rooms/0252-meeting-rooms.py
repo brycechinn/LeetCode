@@ -1,6 +1,6 @@
 class Solution:
     def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
-        # approach: sort intervals then compare in pairs
+        # approach: sort intervals, then compare starts and ends in pairs
         
         intervals.sort(key=lambda x: x[0])
         
@@ -9,5 +9,3 @@ class Solution:
                 return False
         
         return True
-        
-        
