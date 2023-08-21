@@ -5,10 +5,9 @@
 #         self.next = next
 class Solution:
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-    
         dummy = ListNode(0, head)
         group_prev = dummy
-
+        
         while True:
             kth = self.getKth(group_prev, k)
             
@@ -16,24 +15,27 @@ class Solution:
                 break
             
             group_next = kth.next
-            prev, curr = group_next, group_prev.next
-            
+        
+            # reverse group
+            prev = group_next
+            curr = group_prev.next
+
             while curr != group_next:
                 temp = curr.next
                 curr.next = prev
                 prev = curr
                 curr = temp
-            
+        
             temp = group_prev.next
             group_prev.next = kth
             group_prev = temp
-            
+
         return dummy.next
     
     def getKth(self, curr, k):
         while curr and k > 0:
-            k -= 1
             curr = curr.next
+            k -= 1
         
         return curr
-        
+            
