@@ -1,26 +1,33 @@
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        # combination sum, but sort nums first and skip duplicates before 
-        # entering right decision branch
+        # approach: backtracking DFS, prevent duplicate combinations
+        # by sortings nums first and skipping duplicates before
+        # right decision branch
         
         candidates.sort()
-        combo, res = [], []
+        res, combo = [], []
         
         def dfs(i, total):
             if total == target:
                 res.append(combo.copy())
                 return
             
-            if total > target or i == len(candidates):
+            if i == len(candidates) or total > target:
                 return
-
-            combo.append(candidates[i])
-            dfs(i + 1, total + candidates[i])
-
-            combo.pop()
+                
+            num = candidates[i]
+        
+            # include num
+            combo.append(num)
+            dfs(i + 1, total + num)
+            
+            # skip duplicates
             while i + 1 < len(candidates) and candidates[i] == candidates[i + 1]:
                 i += 1
-            dfs(i + 1, total)
             
+            # don't include num
+            combo.pop()
+            dfs(i + 1, total)
+        
         dfs(0, 0)
         return res
