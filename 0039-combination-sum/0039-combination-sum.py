@@ -1,27 +1,26 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        # approach: backtracking, include num and don't increment i or don't
-        # include num and increment i
+        # approach: backtracking DFS; include number and don't increment i
+        # or don't include number and increment i
         
-        res, combo = [], []
+        res, path = [], []
         
         def dfs(i, total):
+            if i == len(candidates) or total > target:
+                return
+            
             if total == target:
-                res.append(combo.copy())
+                res.append(path.copy())
                 return
             
-            if total > target or i == len(candidates):
-                return
+            num = candidates[i]
             
-            # include num, don't increment i
-            combo.append(candidates[i])
-            dfs(i, total + candidates[i])
+            path.append(num)
+            dfs(i, total + num)
             
-            # don't include num, increment i
-            combo.pop()
+            # backtrack
+            path.pop()
             dfs(i + 1, total)
         
         dfs(0, 0)
         return res
-        
-        
