@@ -1,78 +1,52 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
-        # approach 1: backtracking DFS to generate all possible 
-        # left and right partitions
-        '''
-        res = False
-        
-        def dfs(i, left, right):
-            nonlocal res
-            
-            if i == len(nums):
-                if sum(left) == sum(right):
-                    res = True
-                return
-
-            left.append(nums[i])
-            dfs(i + 1, left, right)
-            left.pop()
-            
-            right.append(nums[i])
-            dfs(i + 1, left, right)
-            right.pop()
-
-        dfs(0, [], [])
-        return res
-        '''
-        # approach 2: backtracking DFS to find all partitions that
-        # sum to sum(nums) / 2
+        # approach 1: backtracking DFS, include num in left partition or don't
+        # (i.e. include in right partition)
         '''
         if sum(nums) % 2:
             return False
         
-        target = sum(nums) / 2
-        res = False
+        target = sum(nums) // 2
+        res, part = [], []
         
-        def dfs(i, part):
-            nonlocal res, target
-
-            if i == len(nums):
-                if sum(part) == target:
-                    res = True
+        def dfs(i, total):
+            if i == len(nums) or total > target:
                 return
-
-            part.append(nums[i])
-            dfs(i + 1, part)
+            
+            if total == target:
+                res.append(part.copy())
+                return
+            
+            num = nums[i]
+            
+            part.append(num)
+            dfs(i + 1, total + num)
             
             # backtrack
             part.pop()
-            dfs(i + 1, part)
+            dfs(i + 1, total)
         
-        dfs(0, [])
-        return res
+        dfs(0, 0)
+        return len(res) > 0
         '''
-        # approach 3: bottom-up DP via backwards iteration, set of all possible 
-        # sums, check if sum(nums) / 2 exists in set
+        # approach 2: bottom-up DP via backwards iteration, set of all
+        # possible sums
         
         if sum(nums) % 2:
             return False
         
-        target = sum(nums) / 2
+        target = sum(nums) // 2
+        
         sums = set()
         sums.add(0)
         
         for i in range(len(nums) - 1, -1, -1):
             n = nums[i]
             
-            for s in list(sums):
-                sums.add(n + s)
-            
-            sums.add(n)
-            
-            if target in sums:
-                return True
+            for s in sums.copy():
+                sums.add(s + n)
+                
+                if target in sums:
+                    return True
         
         return False
-                
-        
-        
