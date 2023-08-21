@@ -1,37 +1,38 @@
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
-        
-        # approach: sort tickets, adjacency list of src : list of dst, 
-        # then backtracking DFS to find a valid path
+        # approach: sort tickets, adj list of src : list of dst,
+        # backtracking DFS to find valid path
         
         tickets.sort()
-        adj = collections.defaultdict(list)
-        res = ['JFK']
+        adj = {}
         
         for src, dst in tickets:
+            if src not in adj:
+                adj[src] = []
+            
             adj[src].append(dst)
+
+        res = ['JFK']
         
-        def dfs(src):
+        def dfs(node):
             if len(res) == len(tickets) + 1:
                 return True
             
-            if not adj[src]:
+            if node not in adj:
                 return False
             
-            temp = adj[src].copy()
-            for i, nei in enumerate(temp):
-                # consider neighbor
-                adj[src].pop(i)
+            for i, nei in enumerate(adj[node].copy()):
+                adj[node].pop(i)
                 res.append(nei)
                 
                 if dfs(nei):
                     return True
                 
-                # invalid path, backtrack
-                adj[src].insert(i, nei)
+                # if invalid path, backtrack
+                adj[node].insert(i, nei)
                 res.pop()
             
             return False
-                
+        
         dfs('JFK')
         return res
