@@ -1,38 +1,37 @@
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
-        # approach: union find, decrement result every time a union succeeds
+        # approach: dfs
         
-        par = [i for i in range(n)]
-        rank = [1] * n
-        res = n
+        adj = {}
         
-        def find(n):
-            p = par[n]
+        for node, nei in edges:
+            if node not in adj:
+                adj[node] = []
             
-            while p != par[p]:
-                # path compression
-                par[p] = par[par[p]]
-                p = par[p]
+            if nei not in adj:
+                adj[nei] = []
             
-            return p
+            adj[node].append(nei)
+            adj[nei].append(node)
         
-        def union(n1, n2):
-            p1, p2 = find(n1), find(n2)
-            
-            if p1 == p2:
-                return False
-            
-            if rank[p1] > rank[p2]:
-                par[p2] = p1
-                rank[p1] += rank[p2]
-            else:
-                par[p1] = p2
-                rank[p2] += rank[p1]
-            
-            return True
+        visited = set()
         
-        for n1, n2 in edges:
-            if union(n1, n2):
-                res -= 1
-
+        def dfs(node):
+            if node in visited:
+                return
+            
+            visited.add(node)
+            
+            if node not in adj:
+                return
+            
+            for nei in adj[node]:
+                dfs(nei)
+        
+        res = 0
+        for i in range(n):
+            if i not in visited:
+                dfs(i)
+                res += 1
+                
         return res
