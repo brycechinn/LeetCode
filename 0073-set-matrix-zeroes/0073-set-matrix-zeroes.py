@@ -55,5 +55,3 @@ class Solution:
         if row_zero:
             for c in range(n):
                 matrix[0][c] = 0
-            
-        print(matrix)
