@@ -1,10 +1,12 @@
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        # approach: 3 cases: interval ends before next starts, interval
-        # starts after next ends, or intervals overlap
+        # approach: 3 cases: 
+        #   1. new interval ends before current starts
+        #   2. new interval starts after current ends
+        #   3. intervals overlap
         
         res = []
-
+        
         for i in range(len(intervals)):
             if newInterval[1] < intervals[i][0]:
                 res.append(newInterval)
