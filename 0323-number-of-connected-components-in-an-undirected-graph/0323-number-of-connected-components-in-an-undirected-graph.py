@@ -1,6 +1,6 @@
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
-        # approach: dfs
+        # approach 1: DFS
         
         adj = {}
         
@@ -30,8 +30,10 @@ class Solution:
         
         res = 0
         for i in range(n):
-            if i not in visited:
-                dfs(i)
-                res += 1
+            if i in visited:
+                continue
+                
+            dfs(i)
+            res += 1
                 
         return res
