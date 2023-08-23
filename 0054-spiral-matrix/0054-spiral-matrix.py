@@ -1,35 +1,38 @@
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        # approach: 4 pointers (left, right, top, bottom), check
-        # condition after top row and right column
+        # approach: 4 pointers (l, r, t, b)
         
-        left, right = 0, len(matrix[0])
-        top, bottom = 0, len(matrix)
+        m, n = len(matrix), len(matrix[0])
+        l, r, t, b = 0, n, 0, m
+        
         res = []
         
-        while left < right and top < bottom:
+        while l < r and t < b:
+            # top row
+            for i in range(l, r):
+                res.append(matrix[t][i])
             
-            # get top row
-            for i in range(left, right):
-                res.append(matrix[top][i])
-            top += 1
+            t += 1
             
-            # get right column
-            for i in range(top, bottom):
-                res.append(matrix[i][right - 1])
-            right -= 1
+            # right column
+            for i in range(t, b):
+                res.append(matrix[i][r - 1])
             
-            if not (left < right and top < bottom):
+            r -= 1
+            
+            if not (l < r and t < b):
                 break
             
-            # get bottom row
-            for i in range(right - 1, left - 1, -1):
-                res.append(matrix[bottom - 1][i])
-            bottom -= 1
+            # bottom row
+            for i in range(r - 1, l - 1, -1):
+                res.append(matrix[b - 1][i])
             
-            # get left column
-            for i in range(bottom - 1, top - 1, -1):
-                res.append(matrix[i][left])
-            left += 1
-        
+            b -= 1
+            
+            # left column
+            for i in range(b - 1, t - 1, -1):
+                res.append(matrix[i][l])
+                
+            l += 1
+    
         return res
