@@ -16,9 +16,9 @@ class Trie:
                 curr.children[c] = TrieNode()
             
             curr = curr.children[c]
-
+        
         curr.end = True
-            
+
     def search(self, word: str) -> bool:
         curr = self.root
         
@@ -29,7 +29,7 @@ class Trie:
             curr = curr.children[c]
         
         return curr.end
-
+        
     def startsWith(self, prefix: str) -> bool:
         curr = self.root
         
@@ -40,7 +40,7 @@ class Trie:
             curr = curr.children[c]
         
         return True
-        
+
 # Your Trie object will be instantiated and called as such:
 # obj = Trie()
 # obj.insert(word)
