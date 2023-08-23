@@ -8,20 +8,20 @@ class Trie:
     def __init__(self):
         self.root = TrieNode()
     
-    def addWord(self, word):
+    def insert(self, word):
         curr = self.root
         curr.refs += 1
         
         for c in word:
             if c not in curr.children:
                 curr.children[c] = TrieNode()
-                
+            
             curr = curr.children[c]
             curr.refs += 1
         
         curr.end = True
-        
-    def removeWord(self, word):
+    
+    def remove(self, word):
         curr = self.root
         curr.refs -= 1
         
@@ -32,60 +32,45 @@ class Trie:
 
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        # approach: trie + backtracking, keep track of node refs, 
-        # prune tree when word found
+        # approach: trie + backtracking, keep track of node refs, prune trie
+        # when word found
         
-        ROWS, COLS = len(board), len(board[0])
-        path_set = set()
-        path = ''
-        res = set()
-        
-        trie = Trie()
+        m, n = len(board), len(board[0])
+        t = Trie()
         
         for w in words:
-            trie.addWord(w)
+            t.insert(w)
         
-        def dfs(r, c, curr):
-            nonlocal path
-            
-            if (r not in range(ROWS) or
-                c not in range(COLS) or
-                board[r][c] not in curr.children or
-                curr.children[board[r][c]].refs < 1 or
-                (r, c) in path_set):
-                
+        res, visited, path = set(), set(), []
+        
+        def dfs(r, c, node):
+            if (r not in range(m) or 
+                c not in range(n) or 
+                (r, c) in visited or 
+                board[r][c] not in node.children or 
+                node.children[board[r][c]].refs < 1):
                 return
-
-            path += board[r][c]
-            path_set.add((r, c))
-            curr = curr.children[board[r][c]]
             
-            if curr.end:
-                curr.end = False
-                res.add(path)
-                trie.removeWord(path)
+            node = node.children[board[r][c]]
+            path.append(board[r][c])
             
-            dfs(r + 1, c, curr)
-            dfs(r - 1, c, curr)
-            dfs(r, c + 1, curr)
-            dfs(r, c - 1, curr)
+            w = ''.join(path)
+            if node.end:
+                res.add(w)
+                node.end = False
+                t.remove(w)
             
-            # backtrack
-            path = path[:-1]
-            path_set.remove((r, c))
+            visited.add((r, c))
+            directions = ((1, 0), (-1, 0), (0, 1), (0, -1))
             
-        for r in range(ROWS):
-            for c in range(COLS):
-                dfs(r, c, trie.root)
+            for dr, dc in directions:
+                dfs(r + dr, c + dc, node)
+            
+            path.pop()
+            visited.remove((r, c))
+        
+        for r in range(m):
+            for c in range(n):
+                dfs(r, c, t.root)
         
         return list(res)
-            
-            
-            
-            
-                
-                
-            
-        
-        
-        
