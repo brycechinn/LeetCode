@@ -1,11 +1,11 @@
 class KthLargest:
-    # approach: nums -> min heap, then pop until min heap has size k
-
+    # approach: min heap of size k
+    
     def __init__(self, k: int, nums: List[int]):
-        self.heap, self.k = nums, k
+        self.k, self.heap = k, nums.copy()
         heapq.heapify(self.heap)
         
-        while len(self.heap) > k:
+        while len(self.heap) > self.k:
             heapq.heappop(self.heap)
 
     def add(self, val: int) -> int:
