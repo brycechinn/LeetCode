@@ -6,17 +6,12 @@ public:
             return false;
         }
         
-        array<int, 26> counts_s;
-        array<int, 26> counts_t;
-        counts_s.fill(0);
-        counts_t.fill(0);
+        vector<int> counts_s(26, 0);
+        vector<int> counts_t(26, 0);
         
         for (int i = 0; i < s.size(); i++) {
-            int index_s = static_cast<int>(s[i]) - static_cast<int>('a');
-            int index_t = static_cast<int>(t[i]) - static_cast<int>('a');
-
-            counts_s[index_s]++;
-            counts_t[index_t]++;
+            counts_s[s[i] - 'a']++;
+            counts_t[t[i] - 'a']++;
         }
         
         return counts_s == counts_t;
