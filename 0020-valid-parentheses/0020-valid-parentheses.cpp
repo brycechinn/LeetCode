@@ -13,7 +13,7 @@ public:
             if (hashmap.count(p)) {
                 pars.push(p);
             } else {
-                if (pars.size() && p == hashmap.at(pars.top())) {
+                if (!pars.empty() && p == hashmap.at(pars.top())) {
                     pars.pop();
                 } else {
                     return false;
@@ -21,6 +21,6 @@ public:
             }
         }
         
-        return !pars.size();
+        return pars.empty();
     }
 };
