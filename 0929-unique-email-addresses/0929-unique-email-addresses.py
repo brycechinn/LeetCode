@@ -3,14 +3,13 @@ class Solution:
         unique = set()
         
         for email in emails:
-            at_index = email.index('@')
-            local_name, domain_name = email[:at_index], email[at_index:]
-            local_name = local_name.replace('.', '')
+            local, domain = email.split('@')
+            local = local.replace('.', '')
             
-            if '+' in local_name:
-                plus_index = local_name.index('+')
-                local_name = local_name[:plus_index]
+            if '+' in local:
+                index = local.index('+')
+                local = local[:index]
         
-            unique.add(local_name + domain_name)
+            unique.add(local + '@' + domain)
         
         return len(unique)
