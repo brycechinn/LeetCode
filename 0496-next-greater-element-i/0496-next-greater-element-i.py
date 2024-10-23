@@ -24,6 +24,7 @@ class Solution:
         '''
     
         # approach 2: O(m + n) solution where m = len(nums1), n = len(nums2)
+        # monotonic stack
         
         stack, res = [], [-1] * len(nums1)      
         d = { num1:i for i, num1 in enumerate(nums1) }
