@@ -25,10 +25,8 @@ class Solution:
     
         # approach 2: O(m + n) solution where m = len(nums1), n = len(nums2)
         
-        stack, d, res = [], {}, [-1] * len(nums1)
-        
-        for i, num1 in enumerate(nums1):
-            d[num1] = i
+        stack, res = [], [-1] * len(nums1)      
+        d = { num1:i for i, num1 in enumerate(nums1) }
         
         for num2 in nums2:
             if not stack:
