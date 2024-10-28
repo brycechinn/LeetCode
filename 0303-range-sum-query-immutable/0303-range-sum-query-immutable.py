@@ -1,7 +1,8 @@
+'''
 # approach 1: straightforward solution
 # time: O(n)
 # space: O(n)
-'''
+
 class NumArray:
 
     def __init__(self, nums: List[int]):
@@ -10,7 +11,6 @@ class NumArray:
     def sumRange(self, left: int, right: int) -> int:
         sub = self.nums[left:right + 1]
         return sum(sub)
-'''
 
 # approach 2: cache query results
 # time: O(n)
@@ -30,7 +30,8 @@ class NumArray:
         res = sum(sub)
         self.cache[(left, right)] = res
         return res
-    
+'''
+
 # approach 3: prefix sum array
 # time: O(1)
 # space: O(n)
