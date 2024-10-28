@@ -38,7 +38,6 @@ class NumArray:
 class NumArray:
 
     def __init__(self, nums: List[int]):
-        self.nums = nums
         self.sums = [0] * (len(nums) + 1)
         
         for i, num in enumerate(nums):
