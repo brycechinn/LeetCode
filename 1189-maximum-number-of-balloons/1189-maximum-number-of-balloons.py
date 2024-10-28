@@ -1,6 +1,7 @@
 class Solution:
     def maxNumberOfBalloons(self, text: str) -> int:
         # approach: hashmap of char: count, then compare with target hashmap
+        # time: O(n) space: O(n)
         
         target, target_map, text_map = 'balloon', defaultdict(int), defaultdict(int)
         
