@@ -38,10 +38,11 @@ class NumArray:
 class NumArray:
 
     def __init__(self, nums: List[int]):
-        self.sums = [0] * len(nums)
+        self.sums, total = [], 0
         
         for i, num in enumerate(nums):
-            self.sums[i] = self.sums[i - 1] + num if i > 0 else num
+            total += num
+            self.sums.append(total)
 
     def sumRange(self, left: int, right: int) -> int:
         left_sum, right_sum = self.sums[left - 1] if left > 0 else 0, self.sums[right]
