@@ -13,7 +13,7 @@ class Solution:
         return list(missing)
         '''
         
-        # approach 2: map indices to values and mark as negative
+        # approach 2: map indices to values and mark existing as negative
         # time: O(n) space: O(1)
         
         for i, num in enumerate(nums):
