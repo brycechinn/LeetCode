@@ -8,7 +8,7 @@ class MyHashSet:
     # time: O(1) amortized, space: O(n)
     
     def __init__(self):
-        self.size = 9999
+        self.size = 9973
         self.buckets = [ListNode() for i in range(self.size)]
 
     def add(self, key: int) -> None:
