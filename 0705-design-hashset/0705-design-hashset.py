@@ -12,11 +12,10 @@ class MyHashSet:
         self.buckets = [ListNode() for i in range(self.size)]
 
     def add(self, key: int) -> None:
-        i = self.hashFunc(key)
-        prev = self.buckets[i]
-        curr = prev.next
+        prev = self.buckets[self.hashFunc(key)]
+        curr = prev.next # skip dummy node
         
-        while (curr):
+        while curr:
             if curr.val == key:
                 return
             
@@ -26,11 +25,10 @@ class MyHashSet:
         prev.next = ListNode(key)
 
     def remove(self, key: int) -> None:
-        i = self.hashFunc(key)
-        prev = self.buckets[i]
-        curr = prev.next
+        prev = self.buckets[self.hashFunc(key)]
+        curr = prev.next # skip dummy node
         
-        while (curr):
+        while curr:
             if curr.val == key:
                 prev.next = curr.next
                 return
@@ -39,11 +37,10 @@ class MyHashSet:
             curr = curr.next
                 
     def contains(self, key: int) -> bool:
-        i = self.hashFunc(key)
-        prev = self.buckets[i]
-        curr = prev.next
+        prev = self.buckets[self.hashFunc(key)]
+        curr = prev.next # skip dummy node
         
-        while (curr):
+        while curr:
             if curr.val == key:
                 return True
         
