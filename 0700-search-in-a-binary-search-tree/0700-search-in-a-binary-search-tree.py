@@ -6,6 +6,9 @@
 #         self.right = right
 class Solution:
     def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        # approach: binary search via recursion
+        # time: O(logn), space: O(1)
+        
         if not root or root.val == val:
             return root
         
