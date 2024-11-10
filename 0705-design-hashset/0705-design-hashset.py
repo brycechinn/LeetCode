@@ -1,53 +1,92 @@
 class ListNode:
+    '''
+    A single node of a linked list.
+    '''
+    
     def __init__(self, val: int = 0) -> None:
         self.val = val
         self.next = None
 
-class MyHashSet:
-    # approach: array of linked lists
-    # time: O(1) amortized, space: O(n)
+class LinkedList:
+    '''
+    A linked list with a dummy node. Each node value is unique.
+    '''
     
-    def __init__(self):
-        self.size = 9973 # largest prime in [1, 10000]
-        self.buckets = [ListNode() for i in range(self.size)]
-
-    def add(self, key: int) -> None:
-        prev = self.buckets[self.hashFunc(key)]
-        curr = prev.next # skip dummy node
+    def __init__(self) -> None:
+        self.head = ListNode()
+        
+    def add(self, val: int) -> None:
+        '''
+        Adds a node with the specified value to the end of the linked list.
+        If it is already present, the linked list is not modified.
+        '''
+        
+        prev = self.head
+        curr = prev.next
         
         while curr:
-            if curr.val == key:
+            if curr.val == val:
                 return
             
             prev = curr
             curr = curr.next
 
-        prev.next = ListNode(key)
-
-    def remove(self, key: int) -> None:
-        prev = self.buckets[self.hashFunc(key)]
-        curr = prev.next # skip dummy node
+        prev.next = ListNode(val)
+        
+    def remove(self, val: int) -> None:
+        '''
+        Removes a node with the specified value from the linked list.
+        If it is not present, the linked list is not modified.
+        '''
+    
+        prev = self.head
+        curr = prev.next
         
         while curr:
-            if curr.val == key:
+            if curr.val == val:
                 prev.next = curr.next
                 return
             
             prev = curr
             curr = curr.next
-                
-    def contains(self, key: int) -> bool:
-        prev = self.buckets[self.hashFunc(key)]
-        curr = prev.next # skip dummy node
+    
+    def contains(self, val: int) -> bool:
+        '''
+        Returns True if a node with the specified value exists in the
+        linked list, and False otherwise.
+        '''
+        
+        prev = self.head
+        curr = prev.next
         
         while curr:
-            if curr.val == key:
+            if curr.val == val:
                 return True
         
             prev = curr
             curr = curr.next
         
         return False
+    
+class MyHashSet:
+    # approach: array of buckets, each implemented as linked list
+    # time: O(1) amortized, space: O(n)
+    
+    def __init__(self):
+        self.size = 997 # largest prime in [1, 1000]
+        self.buckets = [LinkedList() for i in range(self.size)]
+
+    def add(self, key: int) -> None:
+        bucket = self.buckets[self.hashFunc(key)]
+        bucket.add(key)
+
+    def remove(self, key: int) -> None:
+        bucket = self.buckets[self.hashFunc(key)]
+        bucket.remove(key)
+                
+    def contains(self, key: int) -> bool:
+        bucket = self.buckets[self.hashFunc(key)]
+        return bucket.contains(key)
             
     def hashFunc(self, key: int) -> int:
         return key % self.size
