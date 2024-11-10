@@ -7,7 +7,8 @@
 class Solution:
     def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
         # approach: binary search via recursion
-        # time: O(logn), space: O(1)
+        # time: O(H), space: O(H)
+        # H = tree height
         
         if not root or root.val == val:
             return root
