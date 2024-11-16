@@ -6,10 +6,10 @@
 #         self.right = right
 class Solution:
     def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
-        # approach: binary search via recursion
+        # approach 1: binary search via recursion with helper function
         # time: O(H), space: O(H)
         # H = tree height
-        
+        '''
         if not root:
             return TreeNode(val)
         
@@ -31,4 +31,19 @@ class Solution:
                 helper(node.right, val)
                     
         helper(root, val)
+        return root
+        '''
+        
+        # approach 2: binary search via recursion without helper function
+        # time: O(H), space: O(H)
+        # H = tree height
+        
+        if not root:
+            return TreeNode(val)
+        
+        if val < root.val:
+            root.left = self.insertIntoBST(root.left, val)
+        else:
+            root.right = self.insertIntoBST(root.right, val)
+            
         return root
