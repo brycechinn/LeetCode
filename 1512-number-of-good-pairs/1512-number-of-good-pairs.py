@@ -14,6 +14,7 @@ class Solution:
     
         # approach 2: hashmap to count num occurrences, triangular number formula
         # time: O(n), space: O(n)
+        '''
         counts, res = Counter(nums), 0
         
         for count in counts.values():
@@ -24,3 +25,15 @@ class Solution:
     def triangularNumberFormula(self, n: int) -> int:
         # will always be a whole number
         return (n * (n + 1)) // 2
+        '''
+        # approach 3: count good pairs while constructing hashmap
+        # time: O(n), space: O(n)
+        
+        counts, res = defaultdict(int), 0
+        
+        for num in nums:
+            res += counts[num]
+            counts[num] += 1
+        
+        return res
+        
