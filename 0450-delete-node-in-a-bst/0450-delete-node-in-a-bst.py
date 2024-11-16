@@ -47,6 +47,8 @@ class Solution:
     '''
         # approach 2: search for node, then delete by replacing value with min of right
         # subtree
+        # time: O(H), space: O(H)
+        # H = tree height
     
         if not root:
             return None
