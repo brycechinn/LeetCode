@@ -6,8 +6,8 @@
 #         self.right = right
 class Solution:
     def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
-        # approach: search for node, then use insert helper function to delete node
-        
+        # approach 1: search for node, then use insert helper function to delete node
+        '''
         if not root:
             return None
         
@@ -44,3 +44,38 @@ class Solution:
             root.right = self.insert(root.right, node)
             
         return root
+    '''
+        # approach 2: search for node, then delete by replacing value with min of right
+        # subtree
+    
+        if not root:
+            return None
+
+        if key == root.val:
+            if not root.left:
+                return root.right
+            
+            if not root.right:
+                return root.left
+            
+            # replace root.val with min of right subtree
+            root.val = self.findMin(root.right)
+            
+            # delete min of right subtree from right subtree
+            root.right = self.deleteNode(root.right, root.val)
+    
+        if key < root.val:
+            root.left = self.deleteNode(root.left, key)
+        else:
+            root.right = self.deleteNode(root.right, key)
+        
+        return root
+    
+    def findMin(self, root):
+        '''
+        Returns the minimum value in a non-empty BST.
+        '''
+        if not root.left:
+            return root.val
+        
+        return self.findMin(root.left)
