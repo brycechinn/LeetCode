@@ -1,22 +1,19 @@
 class Solution:
     def isMonotonic(self, nums: List[int]) -> bool:
-        # approach: two linear scans to check increasing and decreasing
+        # approach: linear scan to check increasing or decreasing
         # time: O(n), space: O(1)
         
-        increasing, prev = True, float('-inf')
+        increasing, decreasing = True, True 
+        inc_prev, dec_prev = float('-inf'), float('inf')
         
         for num in nums:
-            if num < prev:
+            if num < inc_prev:
                 increasing = False
             
-            prev = num
-        
-        decreasing, prev = True, float('inf')
-        
-        for num in nums:
-            if num > prev:
+            if num > dec_prev:
                 decreasing = False
-                
-            prev = num
+            
+            inc_prev = num
+            dec_prev = num
         
         return increasing or decreasing
