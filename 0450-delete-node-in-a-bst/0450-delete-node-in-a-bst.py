@@ -6,8 +6,7 @@
 #         self.right = right
 class Solution:
     def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
-        # approach: search for node, and if found, set parent equal to left
-        # (or right?) child of node to delete
+        # approach: search for node, then use insert helper function to delete node
         
         if not root:
             return None
